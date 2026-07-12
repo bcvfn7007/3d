@@ -54,6 +54,13 @@ document.addEventListener('DOMContentLoaded', () => {
     } catch (e) {
       console.warn('sessionStorage is not accessible', e);
     }
+
+    // 3. Force ScrollTrigger refresh once DOM is un-inert and layout completes
+    if (typeof ScrollTrigger !== 'undefined') {
+      setTimeout(() => {
+        ScrollTrigger.refresh();
+      }, 250);
+    }
   }
 
   // Check if session visited already
@@ -594,6 +601,9 @@ document.addEventListener('DOMContentLoaded', () => {
       clearTimeout(fallbackTimeout);
       splineWrapper.style.opacity = '1';
       console.log("Spline 3D Scene successfully loaded.");
+      if (typeof ScrollTrigger !== 'undefined') {
+        ScrollTrigger.refresh();
+      }
     });
   }
 

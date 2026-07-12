@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 560" width="100%" height="100%">
+  <defs>
+    <!-- Paper texture pattern -->
+    <pattern id="securityGrid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 40 M 0 0 L 40 40" fill="none" stroke="#C1278C" stroke-width="0.5" opacity="0.08" />
+    </pattern>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F48FB1" />
+      <stop offset="50%" stop-color="#EC407A" />
+      <stop offset="100%" stop-color="#C1278C" />
+    </linearGradient>
+  </defs>
+
+  <!-- Certificate Background -->
+  <rect width="800" height="560" fill="#FCF8FA" rx="8" />
+  <rect width="800" height="560" fill="url(#securityGrid)" rx="8" />
+
+  <!-- Borders -->
+  <rect x="20" y="20" width="760" height="520" fill="none" stroke="#C1278C" stroke-width="2" rx="6" />
+  <rect x="25" y="25" width="750" height="510" fill="none" stroke="#150A1F" stroke-width="1" opacity="0.2" rx="4" />
+
+  <!-- Header -->
+  <g transform="translate(50, 60)">
+    <!-- Stylized Stanford Monogram Mini Logo -->
+    <circle cx="40" cy="40" r="30" fill="#C1278C" />
+    <path d="M 47 28 C 42 22, 33 24, 33 29 C 33 34, 47 34, 47 40 C 47 45, 38 48, 33 42" fill="none" stroke="#FCF8FA" stroke-width="4" stroke-linecap="round" />
+    <path d="M 33 42 L 29 45 L 34 47 Z" fill="#FCF8FA" />
+    
+    <text x="85" y="30" font-family="'Unbounded', sans-serif" font-size="22" font-weight="800" fill="#150A1F">STANFORD</text>
+    <text x="85" y="50" font-family="'Space Grotesk', sans-serif" font-size="12" font-weight="700" fill="#C1278C" letter-spacing="3">SCHOOL • MOCK EXAM</text>
+  </g>
+
+  <!-- Title -->
+  <text x="400" y="180" font-family="'Unbounded', sans-serif" font-size="28" font-weight="800" fill="#150A1F" text-anchor="middle">IELTS ACADEMIC REPORT</text>
+  <line x1="250" y1="195" x2="550" y2="195" stroke="#C1278C" stroke-width="3" />
+
+  <!-- Content (Candidate Details) -->
+  <g font-family="'Manrope', sans-serif" font-size="14" fill="#150A1F" transform="translate(80, 240)">
+    <text font-weight="700" fill="rgba(21,10,31,0.6)">CANDIDATE NAME / ИМЯ КАНДИДАТА / NOMZOD ISMI:</text>
+    <text x="0" y="25" font-family="'Space Grotesk', sans-serif" font-size="20" font-weight="700" fill="#150A1F" letter-spacing="1">BEHZOD OLIYEV</text>
+
+    <text x="0" y="70" font-weight="700" fill="rgba(21,10,31,0.6)">TEST DATE / ДАТА ТЕСТА / TEST SANASI:</text>
+    <text x="0" y="95" font-family="'Space Grotesk', sans-serif" font-size="16" font-weight="700">12 MARCH 2026</text>
+
+    <text x="0" y="140" font-weight="700" fill="rgba(21,10,31,0.6)">TEST CENTER / ЦЕНТР ТЕСТИРОВАНИЯ / TEST MARKAZI:</text>
+    <text x="0" y="165" font-size="16" font-weight="700">STANFORD SCHOOL TASHKENT (UZ042)</text>
+  </g>
+
+  <!-- Scores Container -->
+  <g transform="translate(480, 220)">
+    <rect width="240" height="240" rx="10" fill="#150A1F" />
+    <text x="120" y="35" font-family="'Space Grotesk', sans-serif" font-size="14" font-weight="700" fill="#F7EFF4" letter-spacing="2" text-anchor="middle">BAND SCORES</text>
+    
+    <!-- Mini score grid -->
+    <g font-family="'Space Grotesk', sans-serif" font-size="14" fill="#F7EFF4" transform="translate(20, 60)">
+      <text y="0">Listening:</text> <text x="150" y="0" font-weight="700" fill="#EC407A">8.5</text>
+      <text y="30">Reading:</text> <text x="150" y="30" font-weight="700" fill="#EC407A">9.0</text>
+      <text y="60">Writing:</text> <text x="150" y="60" font-weight="700" fill="#EC407A">7.5</text>
+      <text y="90">Speaking:</text> <text x="150" y="90" font-weight="700" fill="#EC407A">8.5</text>
+    </g>
+
+    <!-- Overall Score -->
+    <line x1="20" y1="180" x2="220" y2="180" stroke="#C1278C" stroke-width="1" opacity="0.3" />
+    <text x="40" y="215" font-family="'Unbounded', sans-serif" font-size="14" font-weight="700" fill="#F7EFF4">OVERALL:</text>
+    <rect x="145" y="190" width="75" height="40" rx="6" fill="url(#goldGrad)" />
+    <text x="182.5" y="217" font-family="'Unbounded', sans-serif" font-size="22" font-weight="800" fill="#F7EFF4" text-anchor="middle" dominant-baseline="central">8.5</text>
+  </g>
+
+  <!-- Big Red Watermark -->
+  <g transform="translate(400, 280) rotate(-25)">
+    <text font-family="'Unbounded', sans-serif" font-size="52" font-weight="900" fill="#EC407A" opacity="0.12" text-anchor="middle" letter-spacing="4">SAMPLE • ОБРАЗЕЦ</text>
+    <text y="60" font-family="'Unbounded', sans-serif" font-size="52" font-weight="900" fill="#EC407A" opacity="0.12" text-anchor="middle" letter-spacing="4">NAMUNA</text>
+  </g>
+
+  <!-- Signatures / Footer -->
+  <g transform="translate(80, 480)" font-family="'Manrope', sans-serif" font-size="11" fill="rgba(21,10,31,0.5)">
+    <line x1="0" y1="-10" x2="150" y2="-10" stroke="#150A1F" stroke-width="1" opacity="0.3" />
+    <text>Authorized Examiner Signature</text>
+    <text y="15">Stanford School Academic Board</text>
+  </g>
+  
+  <g transform="translate(280, 480)" font-family="'Manrope', sans-serif" font-size="11" fill="rgba(21,10,31,0.5)">
+    <line x1="0" y1="-10" x2="120" y2="-10" stroke="#150A1F" stroke-width="1" opacity="0.3" />
+    <text>Verification Stamp</text>
+    <text y="15">ID: ST-998-042-85</text>
+  </g>
+</svg>
