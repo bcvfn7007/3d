@@ -1525,8 +1525,8 @@ html.light-theme .divider-overlay-glow {
 /* Interactive Certificate Dimming (Effect 5) */
 .certificates-grid:hover .cert-card-btn:not(:hover),
 .certificates-grid:focus-within .cert-card-btn:not(:focus) {
-  opacity: 0.55;
-  filter: blur(2px);
+  opacity: 0.6;
+  filter: blur(1.5px);
   transform: scale(0.98);
 }
 
