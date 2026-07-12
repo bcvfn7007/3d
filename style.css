@@ -2062,18 +2062,18 @@ html.light-theme .footer-divider {
     grid-template-columns: repeat(2, 1fr);
   }
   .results-grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
   }
   .result-card:nth-child(1) {
     grid-column: span 2;
   }
   .result-card:nth-child(2) {
     grid-column: span 1;
-    transform: translateY(35px);
+    transform: translateY(20px);
   }
   .result-card:nth-child(3) {
     grid-column: span 1;
-    transform: translateY(-20px);
+    transform: translateY(-10px);
   }
   .teachers-grid {
     grid-template-columns: repeat(3, 1fr);

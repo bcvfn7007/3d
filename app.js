@@ -559,17 +559,13 @@ document.addEventListener('DOMContentLoaded', () => {
     smoothTouch: false
   });
 
-  function raf(time) {
-    lenis.raf(time);
-    requestAnimationFrame(raf);
-  }
-  requestAnimationFrame(raf);
-
   // Sync scroll positions for GSAP ScrollTrigger
   lenis.on('scroll', ScrollTrigger.update);
+  
   gsap.ticker.add((time) => {
     lenis.raf(time * 1000);
   });
+  
   gsap.ticker.lagSmoothing(0);
 
 
