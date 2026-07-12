@@ -38,6 +38,21 @@
 </head>
 <body>
 
+  <!-- Cinematic Percentage Preloader (Session Persistent & Safe Fallback - Effect 1.1) -->
+  <div id="preloader" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-live="polite">
+    <div class="preloader-content">
+      <div class="preloader-text-wrapper">
+        <span id="preloader-counter">00</span><span class="pct">%</span>
+      </div>
+      <div class="preloader-progress-track">
+        <div id="preloader-progress-bar"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Application Wrapper for Focus & SR Containment -->
+  <div id="app-content" inert aria-hidden="true">
+
   <!-- Custom Spotlight Cursor (Hidden on Touch Devices) -->
   <div id="custom-cursor" class="custom-cursor" aria-hidden="true">
     <div class="cursor-dot"></div>
@@ -408,7 +423,7 @@
             <div class="score-progress-container">
               <div class="score-row">
                 <span class="score-label" data-i18n="results.before">Было:</span>
-                <span class="score-val">IELTS 5.5</span>
+                <span class="score-val">IELTS <span class="countup-num" data-target="5.5">0.0</span></span>
               </div>
               <div class="progress-track" aria-hidden="true">
                 <div class="progress-bar before-bar" data-score="5.5"></div>
@@ -416,7 +431,7 @@
               
               <div class="score-row final-row">
                 <span class="score-label" data-i18n="results.after">Стало:</span>
-                <span class="score-val accent-text">IELTS 7.5</span>
+                <span class="score-val accent-text">IELTS <span class="countup-num" data-target="7.5">0.0</span></span>
               </div>
               <div class="progress-track" aria-hidden="true">
                 <div class="progress-bar after-bar" data-score="7.5"></div>
@@ -436,7 +451,7 @@
             <div class="score-progress-container">
               <div class="score-row">
                 <span class="score-label" data-i18n="results.before">Было:</span>
-                <span class="score-val">IELTS 6.0</span>
+                <span class="score-val">IELTS <span class="countup-num" data-target="6.0">0.0</span></span>
               </div>
               <div class="progress-track" aria-hidden="true">
                 <div class="progress-bar before-bar" data-score="6.0"></div>
@@ -444,7 +459,7 @@
               
               <div class="score-row final-row">
                 <span class="score-label" data-i18n="results.after">Стало:</span>
-                <span class="score-val accent-text">IELTS 8.5</span>
+                <span class="score-val accent-text">IELTS <span class="countup-num" data-target="8.5">0.0</span></span>
               </div>
               <div class="progress-track" aria-hidden="true">
                 <div class="progress-bar after-bar" data-score="8.5"></div>
@@ -464,7 +479,7 @@
             <div class="score-progress-container">
               <div class="score-row">
                 <span class="score-label" data-i18n="results.before">Было:</span>
-                <span class="score-val">IELTS 5.0</span>
+                <span class="score-val">IELTS <span class="countup-num" data-target="5.0">0.0</span></span>
               </div>
               <div class="progress-track" aria-hidden="true">
                 <div class="progress-bar before-bar" data-score="5.0"></div>
@@ -472,7 +487,7 @@
               
               <div class="score-row final-row">
                 <span class="score-label" data-i18n="results.after">Стало:</span>
-                <span class="score-val accent-text">IELTS 7.0</span>
+                <span class="score-val accent-text">IELTS <span class="countup-num" data-target="7.0">0.0</span></span>
               </div>
               <div class="progress-track" aria-hidden="true">
                 <div class="progress-bar after-bar" data-score="7.0"></div>
@@ -753,6 +768,8 @@
       </button>
     </div>
   </div>
+
+  </div> <!-- Close #app-content -->
 
   <!-- Main JavaScript File -->
   <script src="app.js"></script>

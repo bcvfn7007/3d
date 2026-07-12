@@ -3,8 +3,115 @@
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Register GSAP plugins
-  gsap.registerPlugin(ScrollTrigger);
+  /* --------------------------------------------------------------------------
+     0. Preloader & Screen Reader Safety Controller (Effect 1.1)
+     -------------------------------------------------------------------------- */
+  let revealed = false;
+  let preloaderTimeout = null;
+  let progressInterval = null;
+
+  function revealSite(immediate = false) {
+    if (revealed) return;
+    revealed = true;
+    
+    if (preloaderTimeout) clearTimeout(preloaderTimeout);
+    if (progressInterval) clearInterval(progressInterval);
+    
+    const preloader = document.getElementById('preloader');
+    const appContent = document.getElementById('app-content');
+    
+    // 1. Remove inert/aria-hidden from page content first so focus flow shifts correctly
+    if (appContent) {
+      appContent.removeAttribute('inert');
+      appContent.removeAttribute('aria-hidden');
+    }
+    
+    // 2. Hide preloader overlay and make it inert
+    if (preloader) {
+      const prefersMotion = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (immediate || !prefersMotion || typeof gsap === 'undefined') {
+        preloader.classList.add('preloader-hidden');
+        preloader.setAttribute('inert', 'true');
+        preloader.setAttribute('aria-hidden', 'true');
+      } else {
+        // Progressive enhancement using GSAP circular clip wipe
+        gsap.to(preloader, {
+          clipPath: 'circle(0% at 50% 50%)',
+          duration: 1.4,
+          ease: 'power4.inOut',
+          onComplete: () => {
+            preloader.classList.add('preloader-hidden');
+            preloader.setAttribute('inert', 'true');
+            preloader.setAttribute('aria-hidden', 'true');
+          }
+        });
+      }
+    }
+    
+    // Store session visited status
+    try {
+      sessionStorage.setItem('visited', 'true');
+    } catch (e) {
+      console.warn('sessionStorage is not accessible', e);
+    }
+  }
+
+  // Check if session visited already
+  let isVisited = false;
+  try {
+    isVisited = sessionStorage.getItem('visited') === 'true';
+  } catch (e) {}
+
+  if (isVisited) {
+    revealSite(true);
+  } else {
+    // 3.5-second hard timeout safety net (Pure Vanilla JS)
+    preloaderTimeout = setTimeout(() => {
+      revealSite(false);
+    }, 3500);
+
+    // Dynamic preloader counter increment
+    const counterEl = document.getElementById('preloader-counter');
+    const progressBarEl = document.getElementById('preloader-progress-bar');
+    let currentPct = 0;
+    
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      // a11y reduced motion -> Skip counter increments, reveal immediately
+      revealSite(true);
+    } else {
+      progressInterval = setInterval(() => {
+        // Simulate normal loading increments up to 90
+        if (currentPct < 90) {
+          currentPct += Math.floor(Math.random() * 4) + 1;
+          if (currentPct > 90) currentPct = 90;
+          updatePreloaderPct(currentPct);
+        }
+      }, 50);
+
+      window.addEventListener('load', () => {
+        // Once full page (window) is loaded, complete ticker to 100
+        if (progressInterval) clearInterval(progressInterval);
+        progressInterval = setInterval(() => {
+          if (currentPct < 100) {
+            currentPct += 5;
+            if (currentPct >= 100) {
+              currentPct = 100;
+              clearInterval(progressInterval);
+              revealSite(false);
+            }
+            updatePreloaderPct(currentPct);
+          }
+        }, 30);
+      });
+    }
+
+    function updatePreloaderPct(val) {
+      const preloaderEl = document.getElementById('preloader');
+      if (preloaderEl) preloaderEl.setAttribute('aria-valuenow', val);
+      if (counterEl) counterEl.textContent = val.toString().padStart(2, '0');
+      if (progressBarEl) progressBarEl.style.width = `${val}%`;
+    }
+  }
 
   
   /* --------------------------------------------------------------------------
@@ -563,6 +670,33 @@ document.addEventListener('DOMContentLoaded', () => {
     bindCursorHover('.cta-button-nav, .cta-button-hero, .cta-button-mobile, .course-cta, .form-submit-btn, .success-close-btn', 'hovering-button');
     bindCursorHover('.cert-card-btn', 'hovering-cert');
 
+    // Throttled Magnetic Border Glow (Effect 3.1)
+    document.querySelectorAll('.stat-card, .result-card').forEach(card => {
+      let rafId = null;
+      
+      const handleMouseMove = (e) => {
+        if (rafId) cancelAnimationFrame(rafId);
+        rafId = requestAnimationFrame(() => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          card.style.setProperty('--x', `${x}px`);
+          card.style.setProperty('--y', `${y}px`);
+        });
+      };
+      
+      const handleReset = () => {
+        if (rafId) cancelAnimationFrame(rafId);
+        card.style.removeProperty('--x');
+        card.style.removeProperty('--y');
+      };
+      
+      card.addEventListener('mousemove', handleMouseMove);
+      card.addEventListener('mouseleave', handleReset);
+      card.addEventListener('touchend', handleReset);
+      card.addEventListener('touchcancel', handleReset);
+    });
+
     // 3D Card Tilt Effect (Stats cards & Results)
     document.querySelectorAll('.tilt-card').forEach(card => {
       card.addEventListener('mousemove', (e) => {
@@ -611,7 +745,35 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
 
-  // Hero Image-Mask Loop Timeline (Effect 1)
+  // GSAP Scroll Animations wrapped in safety check (Effect 3.2, 1, 2, 4)
+  if (typeof gsap !== 'undefined') {
+    try {
+      gsap.registerPlugin(ScrollTrigger);
+    } catch (e) {
+      console.warn("GSAP ScrollTrigger register failed:", e);
+    }
+
+    // Score Countup Animations (Effect 3.2 - Once Only)
+    gsap.utils.toArray('.countup-num').forEach(numSpan => {
+      const targetVal = parseFloat(numSpan.getAttribute('data-target'));
+      const obj = { value: 0 };
+      
+      gsap.to(obj, {
+        value: targetVal,
+        duration: 2.0,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: '.results-section',
+          start: 'top 75%',
+          once: true // Animates only once
+        },
+        onUpdate: () => {
+          numSpan.textContent = obj.value.toFixed(1);
+        }
+      });
+    });
+
+    // Hero Image-Mask Loop Timeline (Effect 1)
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const heroMaskTimeline = gsap.timeline({ repeat: -1, yoyo: true });
   
@@ -837,6 +999,7 @@ document.addEventListener('DOMContentLoaded', () => {
     duration: 1,
     ease: 'power3.out'
   });
+  }
 
 
   /* --------------------------------------------------------------------------
