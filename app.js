@@ -560,13 +560,15 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Sync scroll positions for GSAP ScrollTrigger
-  lenis.on('scroll', ScrollTrigger.update);
-  
-  gsap.ticker.add((time) => {
-    lenis.raf(time * 1000);
-  });
-  
-  gsap.ticker.lagSmoothing(0);
+  if (typeof ScrollTrigger !== 'undefined') {
+    lenis.on('scroll', ScrollTrigger.update);
+  }
+
+  function raf(time) {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
+  }
+  requestAnimationFrame(raf);
 
 
   /* --------------------------------------------------------------------------
