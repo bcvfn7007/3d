@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
+  <defs>
+    <!-- Another Gradient Variation -->
+    <linearGradient id="teacherGrad3" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#EC407A" />
+      <stop offset="60%" stop-color="#C1278C" />
+      <stop offset="100%" stop-color="#1F0F2C" />
+    </linearGradient>
+    <clipPath id="circleClip3">
+      <circle cx="100" cy="100" r="90" />
+    </clipPath>
+  </defs>
+
+  <!-- Background Circle -->
+  <circle cx="100" cy="100" r="95" fill="none" stroke="#F48FB1" stroke-width="2" opacity="0.3" />
+  <circle cx="100" cy="100" r="90" fill="url(#teacherGrad3)" />
+
+  <g clip-path="url(#circleClip3)">
+    <!-- Stylized modern silhouette background -->
+    <circle cx="100" cy="190" r="60" fill="#0A0410" opacity="0.6" />
+    <circle cx="100" cy="120" r="30" fill="#0A0410" opacity="0.6" />
+    
+    <!-- Monogram Initials (Sardor Karimov placeholder) -->
+    <text x="100" y="115" 
+          font-family="'Unbounded', 'Space Grotesk', sans-serif" 
+          font-size="44" 
+          font-weight="800" 
+          fill="#F7EFF4" 
+          text-anchor="middle" 
+          dominant-baseline="central"
+          letter-spacing="2">S.K.</text>
+          
+    <!-- Watermark label indicating placeholder status -->
+    <rect x="30" y="155" width="140" height="22" rx="4" fill="#C1278C" opacity="0.9" />
+    <text x="100" y="166" 
+          font-family="'Manrope', sans-serif" 
+          font-size="10" 
+          font-weight="700" 
+          fill="#F7EFF4" 
+          text-anchor="middle" 
+          dominant-baseline="central"
+          letter-spacing="1">TEAM MEMBER</text>
+  </g>
+</svg>

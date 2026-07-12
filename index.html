@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stanford School — Better Future Starts Here</title>
+  
+  <!-- Prevent FOUC (Flash of Unstyled Content) -->
+  <script>
+    (function () {
+      const savedTheme = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (savedTheme === 'light' || (!savedTheme && !prefersDark)) {
+        document.documentElement.classList.add('light-theme');
+      } else {
+        document.documentElement.classList.remove('light-theme');
+      }
+    })();
+  </script>
+
+  <!-- Google Fonts: Unbounded (Geometrical headings), Manrope (Body text), Space Grotesk (Labels & Stats) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;700&amp;family=Unbounded:wght@400;700;900&amp;display=swap" rel="stylesheet">
+
+  <!-- Core Styles -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Lenis for Smooth Scrolling -->
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+
+  <!-- GSAP + ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <!-- Spline Viewer (3D Background) -->
+  <script type="module" src="https://unpkg.com/@splinetool/viewer/build/spline-viewer.js"></script>
+</head>
+<body>
+
+  <!-- Custom Spotlight Cursor (Hidden on Touch Devices) -->
+  <div id="custom-cursor" class="custom-cursor" aria-hidden="true">
+    <div class="cursor-dot"></div>
+    <div class="cursor-circle">
+      <span class="cursor-text" data-i18n="cursor.view">ОТКРЫТЬ</span>
+    </div>
+  </div>
+
+  <!-- Ambient Light Spotlight (Follows mouse on Desktop) -->
+  <div id="ambient-spotlight" class="ambient-spotlight" aria-hidden="true"></div>
+
+  <!-- Global Noise Overlay (Premium paper/grain texture) -->
+  <div class="grain-overlay" aria-hidden="true"></div>
+
+  <!-- Header & Navigation -->
+  <header class="main-header glass-panel">
+    <div class="nav-container">
+      <!-- Logo Monogram inline SVG -->
+      <a href="#hero" class="logo-link" aria-label="Stanford School Logo">
+        <div class="logo-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="40" height="40" aria-hidden="true">
+            <circle cx="250" cy="250" r="220" fill="none" stroke="currentColor" stroke-width="24" />
+            <circle cx="250" cy="250" r="190" fill="none" stroke="currentColor" stroke-width="8" stroke-dasharray="1 0" />
+            <g fill="currentColor">
+              <path d="M 330 140 L 210 140 A 50 50 0 0 0 160 190 A 50 50 0 0 0 210 240 L 290 240 A 50 50 0 0 1 340 290 A 50 50 0 0 1 290 340 L 230 340 L 230 380 L 290 380 A 90 90 0 0 0 380 290 A 90 90 0 0 0 290 200 L 210 200 A 10 10 0 0 1 200 190 A 10 10 0 0 1 210 180 L 330 180 Z" />
+              <path d="M 230 340 L 170 340 L 205 305 Z" />
+              <path d="M 170 340 L 120 390 L 170 410 Z" />
+              <path d="M 120 390 L 100 410 L 125 415 L 140 400 Z" />
+            </g>
+          </svg>
+        </div>
+        <div class="logo-text">
+          <span class="brand-name">STANFORD</span>
+          <span class="brand-subname" data-i18n="logo.subtitle">SCHOOL</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation -->
+      <nav class="desktop-nav" aria-label="Main Navigation">
+        <ul class="nav-links">
+          <li><a href="#courses" class="nav-link-item magnetic" data-i18n="nav.courses">Курсы</a></li>
+          <li><a href="#results" class="nav-link-item magnetic" data-i18n="nav.results">Результаты</a></li>
+          <li><a href="#teachers" class="nav-link-item magnetic" data-i18n="nav.teachers">Преподаватели</a></li>
+          <li><a href="#certificates" class="nav-link-item magnetic" data-i18n="nav.certificates">Сертификаты</a></li>
+        </ul>
+      </nav>
+
+      <!-- Right Header Actions (Theme, Language, CTA) -->
+      <div class="header-actions">
+        <!-- Theme Toggle -->
+        <button id="theme-toggle" class="theme-toggle magnetic" aria-label="Переключить тему" aria-pressed="false">
+          <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+          <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+        </button>
+
+        <!-- Language Switcher -->
+        <div class="lang-switcher">
+          <button class="lang-btn active" data-lang="ru">RU</button>
+          <button class="lang-btn" data-lang="uz">UZ</button>
+          <button class="lang-btn" data-lang="en">EN</button>
+        </div>
+
+        <!-- Magnetic Header CTA -->
+        <a href="#enrollment-form" class="cta-button-nav magnetic" data-i18n="nav.cta">Записаться</a>
+
+        <!-- Mobile Menu Toggle Button -->
+        <button id="mobile-menu-toggle" class="mobile-menu-toggle" aria-label="Открыть меню" aria-expanded="false">
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Dropdown Navigation Menu -->
+  <div id="mobile-nav" class="mobile-nav glass-panel" aria-hidden="true">
+    <div class="mobile-nav-content">
+      <ul class="mobile-nav-links">
+        <li><a href="#courses" class="mobile-nav-link" data-i18n="nav.courses">Курсы</a></li>
+        <li><a href="#results" class="mobile-nav-link" data-i18n="nav.results">Результаты</a></li>
+        <li><a href="#teachers" class="mobile-nav-link" data-i18n="nav.teachers">Преподаватели</a></li>
+        <li><a href="#certificates" class="mobile-nav-link" data-i18n="nav.certificates">Сертификаты</a></li>
+      </ul>
+      <div class="mobile-nav-actions">
+        <div class="mobile-lang-switcher">
+          <button class="lang-btn active" data-lang="ru">RU</button>
+          <button class="lang-btn" data-lang="uz">UZ</button>
+          <button class="lang-btn" data-lang="en">EN</button>
+        </div>
+        <a href="#enrollment-form" class="cta-button-mobile" data-i18n="nav.cta">Записаться</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Page Scroll Indicator (Progress bar at the top) -->
+  <div class="scroll-progress-container" aria-hidden="true">
+    <div id="scroll-progress-bar" class="scroll-progress-bar"></div>
+  </div>
+
+  <main>
+    <!-- 1. Hero Section -->
+    <section id="hero" class="hero-section">
+      <!-- 3D Scene Wrapper -->
+      <div class="hero-3d-container">
+        <!-- Live Spline Scene (Loaded asynchronously) -->
+        <div id="spline-wrapper" class="spline-wrapper">
+          <!-- We supply a known responsive public Spline URL from community that matches our color palette or is elegant.
+               We attach Scroll events in JS to update rotation based on scroll position. -->
+          <spline-viewer url="https://prod.spline.design/6Wq1Q7YGy42kmO2z/scene.splinecode" background="transparent"></spline-viewer>
+        </div>
+        <!-- High-quality CSS Gradient + Noise Fallback Poster -->
+        <div class="hero-fallback-bg">
+          <div class="glow-blob blob-1"></div>
+          <div class="glow-blob blob-2"></div>
+        </div>
+        <!-- Gradient Scrim for Content Contrast -->
+        <div class="hero-scrim"></div>
+      </div>
+
+      <div class="content-container hero-content">
+        <!-- Eyebrow with reveal animation -->
+        <div class="hero-eyebrow-wrapper">
+          <span class="eyebrow-text" data-i18n="hero.eyebrow">BETTER FUTURE STARTS HERE</span>
+        </div>
+        
+        <!-- Heading with Split Character / Word reveal -->
+        <h1 class="hero-title">
+          <span class="word" data-i18n="hero.title_part1">Раскрой</span>
+          <span class="word accent-word">
+            <span class="word-fill" data-i18n="hero.title_part2">Свой</span>
+          </span>
+          <span class="word" data-i18n="hero.title_part3">Английский</span>
+        </h1>
+
+        <!-- Subtitle with line-by-line reveal -->
+        <p class="hero-subtitle" data-i18n="hero.subtitle_text">
+          Премиальный языковой центр в Ташкенте. Мы не продаём уроки — мы гарантируем результат в виде сданных экзаменов и свободного общения.
+        </p>
+
+        <!-- Magnetic CTA Hero -->
+        <div class="hero-cta-wrapper">
+          <a href="#enrollment-form" class="cta-button-hero magnetic-btn" id="hero-cta">
+            <span class="cta-inner" data-i18n="hero.cta">Начать обучение</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Animated Scroll Down Indicator -->
+      <a href="#stats" class="scroll-down-indicator" aria-label="Прокрутить к показателям">
+        <span class="scroll-mouse">
+          <span class="scroll-wheel"></span>
+        </span>
+      </a>
+    </section>
+
+    <!-- 2. Stats Section (Glassmorphic cards with 3D tilt) -->
+    <section id="stats" class="stats-section">
+      <div class="content-container">
+        <div class="stats-grid">
+          <!-- Stat Card 1 -->
+          <div class="stat-card glass-panel tilt-card">
+            <div class="stat-glow"></div>
+            <div class="stat-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            </div>
+            <div class="stat-number">8.0</div>
+            <div class="stat-label" data-i18n="stats.ielts">Средний балл IELTS выпускников</div>
+          </div>
+
+          <!-- Stat Card 2 -->
+          <div class="stat-card glass-panel tilt-card">
+            <div class="stat-glow"></div>
+            <div class="stat-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <div class="stat-number">8</div>
+            <div class="stat-label" data-i18n="stats.group">Максимум студентов в группе</div>
+          </div>
+
+          <!-- Stat Card 3 -->
+          <div class="stat-card glass-panel tilt-card">
+            <div class="stat-glow"></div>
+            <div class="stat-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+            </div>
+            <div class="stat-number" data-i18n="stats.native_num">100%</div>
+            <div class="stat-label" data-i18n="stats.native">Опытные преподаватели с IELTS 8.5+</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Courses Section (Grid of course cards, staggered reveal) -->
+    <section id="courses" class="courses-section">
+      <div class="content-container">
+        <h2 class="section-title">
+          <span class="title-text" data-i18n="courses.title">Наши Курсы</span>
+          <span class="title-underline"></span>
+        </h2>
+        
+        <div class="courses-grid">
+          <!-- Course Card 1: IELTS -->
+          <div class="course-card glass-panel">
+            <div class="course-badge">IELTS</div>
+            <h3 class="course-title" data-i18n="courses.ielts.title">Интенсив IELTS</h3>
+            <p class="course-desc" data-i18n="courses.ielts.desc">Полное погружение в формат экзамена. Стратегии для каждой секции, пробные тесты каждую неделю и обратная связь от экспертов.</p>
+            <div class="course-details">
+              <span class="detail-item"><strong data-i18n="courses.duration">Длительность:</strong> <span data-i18n="courses.ielts.duration_val">3-6 месяцев</span></span>
+              <span class="detail-item"><strong data-i18n="courses.intensity">Интенсивность:</strong> <span data-i18n="courses.ielts.intensity_val">3 раза в неделю по 2 часа</span></span>
+            </div>
+            <a href="#enrollment-form" class="course-cta magnetic-btn">
+              <span class="cta-inner" data-i18n="courses.apply">Записаться</span>
+            </a>
+          </div>
+
+          <!-- Course Card 2: General English -->
+          <div class="course-card glass-panel">
+            <div class="course-badge">General</div>
+            <h3 class="course-title" data-i18n="courses.general.title">General English</h3>
+            <p class="course-desc" data-i18n="courses.general.desc">Развитие разговорной речи, грамматики и словарного запаса. Преодоление языкового барьера по уникальной методике.</p>
+            <div class="course-details">
+              <span class="detail-item"><strong data-i18n="courses.duration">Длительность:</strong> <span data-i18n="courses.general.duration_val">4 месяца на уровень</span></span>
+              <span class="detail-item"><strong data-i18n="courses.intensity">Интенсивность:</strong> <span data-i18n="courses.general.intensity_val">3 раза в неделю по 1.5 часа</span></span>
+            </div>
+            <a href="#enrollment-form" class="course-cta magnetic-btn">
+              <span class="cta-inner" data-i18n="courses.apply">Записаться</span>
+            </a>
+          </div>
+
+          <!-- Course Card 3: Speaking Club -->
+          <div class="course-card glass-panel">
+            <div class="course-badge">Speaking</div>
+            <h3 class="course-title" data-i18n="courses.speaking.title">Разговорный клуб</h3>
+            <p class="course-desc" data-i18n="courses.speaking.desc">Практика общения на актуальные темы с носителями языка и приглашенными гостями. Никаких учебников, только живой язык.</p>
+            <div class="course-details">
+              <span class="detail-item"><strong data-i18n="courses.duration">Длительность:</strong> <span data-i18n="courses.speaking.duration_val">Постоянно</span></span>
+              <span class="detail-item"><strong data-i18n="courses.intensity">Интенсивность:</strong> <span data-i18n="courses.speaking.intensity_val">Каждую субботу по 2 часа</span></span>
+            </div>
+            <a href="#enrollment-form" class="course-cta magnetic-btn">
+              <span class="cta-inner" data-i18n="courses.apply">Записаться</span>
+            </a>
+          </div>
+
+          <!-- Course Card 4: Kids English -->
+          <div class="course-card glass-panel">
+            <div class="course-badge">Kids</div>
+            <h3 class="course-title" data-i18n="courses.kids.title">Английский для детей</h3>
+            <p class="course-desc" data-i18n="courses.kids.desc">Интерактивные занятия в игровой форме для детей от 7 до 12 лет. Учим любить английский с первых шагов.</p>
+            <div class="course-details">
+              <span class="detail-item"><strong data-i18n="courses.duration">Длительность:</strong> <span data-i18n="courses.kids.duration_val">Учебный год</span></span>
+              <span class="detail-item"><strong data-i18n="courses.intensity">Интенсивность:</strong> <span data-i18n="courses.kids.intensity_val">2 раза в неделю по 1.5 часа</span></span>
+            </div>
+            <a href="#enrollment-form" class="course-cta magnetic-btn">
+              <span class="cta-inner" data-i18n="courses.apply">Записаться</span>
+            </a>
+          </div>
+
+          <!-- Course Card 5: Business English -->
+          <div class="course-card glass-panel">
+            <div class="course-badge">Business</div>
+            <h3 class="course-title" data-i18n="courses.business.title">Business English</h3>
+            <p class="course-desc" data-i18n="courses.business.desc">Деловая переписка, подготовка к презентациям и переговорам, специфическая лексика. Для специалистов и топ-менеджеров.</p>
+            <div class="course-details">
+              <span class="detail-item"><strong data-i18n="courses.duration">Длительность:</strong> <span data-i18n="courses.business.duration_val">3 месяца</span></span>
+              <span class="detail-item"><strong data-i18n="courses.intensity">Интенсивность:</strong> <span data-i18n="courses.business.intensity_val">3 раза в неделю по 1.5 часа</span></span>
+            </div>
+            <a href="#enrollment-form" class="course-cta magnetic-btn">
+              <span class="cta-inner" data-i18n="courses.apply">Записаться</span>
+            </a>
+          </div>
+
+          <!-- Course Card 6: Private Lessons -->
+          <div class="course-card glass-panel">
+            <div class="course-badge">Individual</div>
+            <h3 class="course-title" data-i18n="courses.individual.title">Индивидуальные занятия</h3>
+            <p class="course-desc" data-i18n="courses.individual.desc">Персональная программа, адаптированная под ваши конкретные цели и график. Максимальное внимание преподавателя.</p>
+            <div class="course-details">
+              <span class="detail-item"><strong data-i18n="courses.duration">Длительность:</strong> <span data-i18n="courses.individual.duration_val">Гибко</span></span>
+              <span class="detail-item"><strong data-i18n="courses.intensity">Интенсивность:</strong> <span data-i18n="courses.individual.intensity_val">Индивидуальный график</span></span>
+            </div>
+            <a href="#enrollment-form" class="course-cta magnetic-btn">
+              <span class="cta-inner" data-i18n="courses.apply">Записаться</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Results Section (Before/After with animated progress bars) -->
+    <section id="results" class="results-section">
+      <div class="content-container">
+        <h2 class="section-title">
+          <span class="title-text" data-i18n="results.title">Результаты учеников</span>
+          <span class="title-underline"></span>
+        </h2>
+
+        <div class="results-grid">
+          <!-- Result Card 1 -->
+          <div class="result-card glass-panel">
+            <div class="result-student">
+              <span class="student-name" data-i18n="results.student1.name">Азиз Каримов</span>
+              <span class="student-target">IELTS Preparation</span>
+            </div>
+            <div class="score-progress-container">
+              <div class="score-row">
+                <span class="score-label" data-i18n="results.before">Было:</span>
+                <span class="score-val">IELTS 5.5</span>
+              </div>
+              <div class="progress-track" aria-hidden="true">
+                <div class="progress-bar before-bar" data-score="5.5"></div>
+              </div>
+              
+              <div class="score-row final-row">
+                <span class="score-label" data-i18n="results.after">Стало:</span>
+                <span class="score-val accent-text">IELTS 7.5</span>
+              </div>
+              <div class="progress-track" aria-hidden="true">
+                <div class="progress-bar after-bar" data-score="7.5"></div>
+              </div>
+            </div>
+            <p class="student-feedback" data-i18n="results.student1.feedback">
+              "Благодаря Stanford School поднял балл с 5.5 до 7.5 за 4 месяца! Очень крутой формат тестов по субботам, сразу понимаешь свои слабые зоны."
+            </p>
+          </div>
+
+          <!-- Result Card 2 -->
+          <div class="result-card glass-panel">
+            <div class="result-student">
+              <span class="student-name" data-i18n="results.student2.name">Нигора Усманова</span>
+              <span class="student-target">IELTS Academic</span>
+            </div>
+            <div class="score-progress-container">
+              <div class="score-row">
+                <span class="score-label" data-i18n="results.before">Было:</span>
+                <span class="score-val">IELTS 6.0</span>
+              </div>
+              <div class="progress-track" aria-hidden="true">
+                <div class="progress-bar before-bar" data-score="6.0"></div>
+              </div>
+              
+              <div class="score-row final-row">
+                <span class="score-label" data-i18n="results.after">Стало:</span>
+                <span class="score-val accent-text">IELTS 8.5</span>
+              </div>
+              <div class="progress-track" aria-hidden="true">
+                <div class="progress-bar after-bar" data-score="8.5"></div>
+              </div>
+            </div>
+            <p class="student-feedback" data-i18n="results.student2.feedback">
+              "Моя цель была поступить в зарубежный вуз. Результат превзошел все ожидания — 8.5! Преподаватели очень требовательные, но это того стоило."
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Teachers Section (Compliant placeholders & stylized cards) -->
+    <section id="teachers" class="teachers-section">
+      <div class="content-container">
+        <h2 class="section-title">
+          <span class="title-text" data-i18n="teachers.title">Наша Команда</span>
+          <span class="title-underline"></span>
+        </h2>
+
+        <div class="teachers-grid">
+          <!-- Teacher Card 1 -->
+          <div class="teacher-card glass-panel">
+            <div class="teacher-image-wrapper">
+              <img src="assets/teacher_placeholder_1.svg" class="teacher-avatar" alt="Образец аватара: Дилшод Исмоилов" data-i18n-alt="teachers.t1.alt">
+            </div>
+            <div class="teacher-info">
+              <h3 class="teacher-name" data-i18n="teachers.t1.name">Дилшод Исмоилов</h3>
+              <span class="teacher-role" data-i18n="teachers.t1.role">Старший методист, IELTS 8.5</span>
+              <p class="teacher-bio" data-i18n="teachers.t1.bio">
+                Опыт преподавания — 10 лет. Специализируется на подготовке к Speaking и Writing частям IELTS. Выпускник Вестминстерского университета.
+              </p>
+            </div>
+          </div>
+
+          <!-- Teacher Card 2 -->
+          <div class="teacher-card glass-panel">
+            <div class="teacher-image-wrapper">
+              <img src="assets/teacher_placeholder_2.svg" class="teacher-avatar" alt="Образец аватара: Анна Новикова" data-i18n-alt="teachers.t2.alt">
+            </div>
+            <div class="teacher-info">
+              <h3 class="teacher-name" data-i18n="teachers.t2.name">Анна Новикова</h3>
+              <span class="teacher-role" data-i18n="teachers.t2.role">Преподаватель General English, IELTS 8.5</span>
+              <p class="teacher-bio" data-i18n="teachers.t2.bio">
+                Обучалась в Великобритании. Создает интерактивные уроки, помогающие студентам заговорить на английском с первого занятия.
+              </p>
+            </div>
+          </div>
+
+          <!-- Teacher Card 3 -->
+          <div class="teacher-card glass-panel">
+            <div class="teacher-image-wrapper">
+              <img src="assets/teacher_placeholder_3.svg" class="teacher-avatar" alt="Образец аватара: Сардор Каримов" data-i18n-alt="teachers.t3.alt">
+            </div>
+            <div class="teacher-info">
+              <h3 class="teacher-name" data-i18n="teachers.t3.name">Сардор Каримов</h3>
+              <span class="teacher-role" data-i18n="teachers.t3.role">Куратор разговорных клубов, носитель языка</span>
+              <p class="teacher-bio" data-i18n="teachers.t3.bio">
+                Прожил 12 лет в США. Специализируется на американском произношении, современном сленге и проведении дебатов.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Certificates Gallery Section (Compliant watermarked SVGs + Lightbox) -->
+    <section id="certificates" class="certificates-section">
+      <div class="content-container">
+        <h2 class="section-title">
+          <span class="title-text" data-i18n="certificates.title">Сертификаты школы</span>
+          <span class="title-underline"></span>
+        </h2>
+        
+        <p class="section-subtitle" data-i18n="certificates.subtitle">
+          (Все представленные документы являются интерактивными демонстрационными образцами)
+        </p>
+
+        <div class="certificates-grid">
+          <!-- Cert Card 1 -->
+          <button class="cert-card-btn glass-panel" aria-haspopup="dialog" aria-label="Открыть образец сертификата IELTS 8.5" data-cert-src="assets/certificate_ielts_1.svg" data-i18n-aria-label="certificates.c1.aria">
+            <div class="cert-image-container">
+              <img src="assets/certificate_ielts_1.svg" class="cert-thumb" alt="Образец сертификата IELTS 8.5 на имя Behzod Oliyev" loading="lazy" data-i18n-alt="certificates.c1.alt">
+              <div class="cert-overlay"></div>
+            </div>
+            <div class="cert-info">
+              <span class="cert-student" data-i18n="certificates.c1.student">Бехзод Алиев</span>
+              <span class="cert-type" data-i18n="certificates.c1.type">IELTS Academic (Образец)</span>
+            </div>
+          </button>
+
+          <!-- Cert Card 2 -->
+          <button class="cert-card-btn glass-panel" aria-haspopup="dialog" aria-label="Открыть образец сертификата IELTS 7.5" data-cert-src="assets/certificate_ielts_2.svg" data-i18n-aria-label="certificates.c2.aria">
+            <div class="cert-image-container">
+              <img src="assets/certificate_ielts_2.svg" class="cert-thumb" alt="Образец сертификата IELTS 7.5 на имя Sherzod Tursunov" loading="lazy" data-i18n-alt="certificates.c2.alt">
+              <div class="cert-overlay"></div>
+            </div>
+            <div class="cert-info">
+              <span class="cert-student" data-i18n="certificates.c2.student">Шерзод Турсунов</span>
+              <span class="cert-type" data-i18n="certificates.c2.type">IELTS Academic (Образец)</span>
+            </div>
+          </button>
+
+          <!-- Cert Card 3 -->
+          <button class="cert-card-btn glass-panel" aria-haspopup="dialog" aria-label="Открыть образец сертификата об окончании уровня C1" data-cert-src="assets/certificate_completion.svg" data-i18n-aria-label="certificates.c3.aria">
+            <div class="cert-image-container">
+              <img src="assets/certificate_completion.svg" class="cert-thumb" alt="Образец сертификата об окончании уровня C1 на имя Madina Saidova" loading="lazy" data-i18n-alt="certificates.c3.alt">
+              <div class="cert-overlay"></div>
+            </div>
+            <div class="cert-info">
+              <span class="cert-student" data-i18n="certificates.c3.student">Мадина Саидова</span>
+              <span class="cert-type" data-i18n="certificates.c3.type">Курс General English C1 (Образец)</span>
+            </div>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. Enrollment Contact Form (Uzbekistan validation) -->
+    <section id="enrollment-form" class="form-section">
+      <div class="content-container form-wrapper glass-panel">
+        <div class="form-grid">
+          <!-- Text column -->
+          <div class="form-info-column">
+            <h2 class="form-heading" data-i18n="form.heading">Запишись на бесплатный урок</h2>
+            <p class="form-text" data-i18n="form.subheading">
+              Пройди тестирование, получи персональный план подготовки и бесплатную консультацию методиста по IELTS.
+            </p>
+            <div class="contact-details-list">
+              <div class="contact-item">
+                <span class="contact-icon" aria-hidden="true">📍</span>
+                <span class="contact-desc" data-i18n="footer.address">Узбекистан, г. Ташкент, Мирабадский р-н, ул. Амира Темура, 42</span>
+              </div>
+              <div class="contact-item">
+                <span class="contact-icon" aria-hidden="true">📞</span>
+                <a href="tel:+998712004242" class="contact-desc">+998 71 200 42 42</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Form column -->
+          <div class="form-field-column">
+            <form id="lead-form" class="lead-form" novalidate>
+              <div class="form-group">
+                <label for="student-name" class="sr-only" data-i18n="form.name_label">Ваше имя</label>
+                <input type="text" id="student-name" class="form-input" placeholder="Ваше имя" data-i18n-placeholder="form.name_placeholder" required aria-required="true">
+                <span class="error-msg" id="name-error" aria-live="polite"></span>
+              </div>
+
+              <div class="form-group">
+                <label for="student-phone" class="sr-only" data-i18n="form.phone_label">Номер телефона</label>
+                <input type="tel" id="student-phone" class="form-input" placeholder="+998 __ ___ __ __" data-i18n-placeholder="form.phone_placeholder" required aria-required="true">
+                <span class="error-msg" id="phone-error" aria-live="polite"></span>
+              </div>
+
+              <div class="form-group">
+                <label for="course-select" class="sr-only" data-i18n="form.course_label">Выберите курс</label>
+                <div class="custom-select-wrapper">
+                  <select id="course-select" class="form-select" required aria-required="true">
+                    <option value="" disabled selected data-i18n="form.course_placeholder">Выберите курс</option>
+                    <option value="ielts" data-i18n="form.opt_ielts">Интенсив IELTS</option>
+                    <option value="general" data-i18n="form.opt_general">General English</option>
+                    <option value="speaking" data-i18n="form.opt_speaking">Разговорный клуб</option>
+                    <option value="kids" data-i18n="form.opt_kids">Английский для детей</option>
+                    <option value="business" data-i18n="form.opt_business">Business English</option>
+                    <option value="individual" data-i18n="form.opt_individual">Индивидуальные занятия</option>
+                  </select>
+                </div>
+                <span class="error-msg" id="course-error" aria-live="polite"></span>
+              </div>
+
+              <button type="submit" id="submit-btn" class="form-submit-btn magnetic-btn">
+                <span class="cta-inner" data-i18n="form.submit">Оставить заявку</span>
+              </button>
+            </form>
+
+            <!-- Success screen -->
+            <div id="form-success" class="form-success-overlay" aria-hidden="true" tabindex="-1">
+              <div class="success-content">
+                <div class="success-icon" aria-hidden="true">✓</div>
+                <h3 class="success-title" data-i18n="form.success_title">Заявка принята!</h3>
+                <p class="success-desc" data-i18n="form.success_desc">Наш менеджер свяжется с вами в течение 15 минут для подтверждения записи.</p>
+                <button type="button" id="close-success-btn" class="success-close-btn" data-i18n="form.close">Закрыть</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="main-footer">
+    <div class="content-container">
+      <div class="footer-grid">
+        <!-- Brand Info -->
+        <div class="footer-brand">
+          <div class="logo-link">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="30" height="30" aria-hidden="true">
+              <circle cx="250" cy="250" r="220" fill="none" stroke="currentColor" stroke-width="24" />
+              <g fill="currentColor">
+                <path d="M 330 140 L 210 140 A 50 50 0 0 0 160 190 A 50 50 0 0 0 210 240 L 290 240 A 50 50 0 0 1 340 290 A 50 50 0 0 1 290 340 L 230 340 L 230 380 L 290 380 A 90 90 0 0 0 380 290 A 90 90 0 0 0 290 200 L 210 200 A 10 10 0 0 1 200 190 A 10 10 0 0 1 210 180 L 330 180 Z" />
+                <path d="M 230 340 L 170 340 L 205 305 Z" />
+                <path d="M 170 340 L 120 390 L 170 410 Z" />
+                <path d="M 120 390 L 100 410 L 125 415 L 140 400 Z" />
+              </g>
+            </svg>
+            <div class="logo-text">
+              <span class="brand-name">STANFORD</span>
+              <span class="brand-subname" data-i18n="logo.subtitle">SCHOOL</span>
+            </div>
+          </div>
+          <p class="footer-slogan" data-i18n="hero.eyebrow">Better future starts here</p>
+        </div>
+
+        <!-- Links -->
+        <div class="footer-links-col">
+          <h4 class="footer-header" data-i18n="footer.sections">Разделы</h4>
+          <ul class="footer-links">
+            <li><a href="#courses" class="footer-link-item" data-i18n="nav.courses">Курсы</a></li>
+            <li><a href="#results" class="footer-link-item" data-i18n="nav.results">Результаты</a></li>
+            <li><a href="#teachers" class="footer-link-item" data-i18n="nav.teachers">Преподаватели</a></li>
+            <li><a href="#certificates" class="footer-link-item" data-i18n="nav.certificates">Сертификаты</a></li>
+          </ul>
+        </div>
+
+        <!-- Contacts Info -->
+        <div class="footer-links-col">
+          <h4 class="footer-header" data-i18n="footer.contacts">Контакты</h4>
+          <p class="footer-info-text" data-i18n="footer.address">
+            Узбекистан, г. Ташкент, Мирабадский р-н, ул. Амира Темура, 42
+          </p>
+          <p class="footer-info-text">
+            <a href="tel:+998712004242" class="footer-phone">+998 71 200 42 42</a>
+          </p>
+        </div>
+      </div>
+
+      <hr class="footer-divider" />
+
+      <div class="footer-bottom">
+        <p class="copyright" data-i18n="footer.copyright">© 2026 Stanford School. Все права защищены. Лицензия Узб №409-12.</p>
+        <div class="developer-credit">
+          <span data-i18n="footer.developer">Разработано по стандартам</span> <span class="premium-badge">Awwwards</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Lightbox Modal Dialog (WCAG compliant dialog structure) -->
+  <div id="cert-lightbox" class="lightbox-modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="lightbox-title">
+    <!-- Screen reader label for accessibility -->
+    <h2 id="lightbox-title" class="sr-only" data-i18n="lightbox.sr_title">Образец сертификата во весь экран</h2>
+    
+    <!-- Lightbox Backdrop overlay -->
+    <div class="lightbox-backdrop" id="lightbox-close-backdrop"></div>
+    
+    <div class="lightbox-content-wrapper">
+      <!-- Image frame -->
+      <div class="lightbox-image-box">
+        <img id="lightbox-img" src="" alt="" class="lightbox-img">
+      </div>
+      
+      <!-- Close button (focus managed, semantic markup) -->
+      <button id="lightbox-close-btn" class="lightbox-close-btn" aria-label="Закрыть во весь экран" data-i18n-aria-label="lightbox.close_aria">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="close-icon"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Main JavaScript File -->
+  <script src="app.js"></script>
+</body>
+</html>

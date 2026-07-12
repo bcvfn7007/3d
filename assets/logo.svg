@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%">
+  <!-- Double Ring Outer Border -->
+  <circle cx="250" cy="250" r="220" fill="none" stroke="currentColor" stroke-width="16" />
+  <circle cx="250" cy="250" r="200" fill="none" stroke="currentColor" stroke-width="6" stroke-dasharray="1 0" />
+
+  <!-- Monogram S with Pencil Tip -->
+  <g fill="currentColor">
+    <!-- Top & Middle of S (Thick smooth paths) -->
+    <!-- We draw the S as a unified custom path representing the monogram -->
+    <path d="M 330 140 
+             L 210 140 
+             A 50 50 0 0 0 160 190 
+             A 50 50 0 0 0 210 240 
+             L 290 240 
+             A 50 50 0 0 1 340 290 
+             A 50 50 0 0 1 290 340 
+             L 230 340
+             L 230 380
+             L 290 380
+             A 90 90 0 0 0 380 290
+             A 90 90 0 0 0 290 200
+             L 210 200
+             A 10 10 0 0 1 200 190
+             A 10 10 0 0 1 210 180
+             L 330 180
+             Z" />
+             
+    <!-- Pencil Tip at the Bottom Left -->
+    <!-- The bottom curves back, ending in a pencil tip pointing down-left -->
+    <!-- Pencil body connector -->
+    <path d="M 230 340 
+             L 170 340 
+             L 205 305 
+             Z" />
+             
+    <!-- Pencil wooden cone pointing down-left -->
+    <path d="M 170 340 
+             L 120 390 
+             L 170 410 
+             Z" />
+             
+    <!-- Pencil lead tip (pointing down-left) -->
+    <path d="M 120 390 
+             L 100 410 
+             L 125 415 
+             L 140 400
+             Z" />
+  </g>
+  
+  <!-- Text inside the circular logo at the bottom -->
+  <!-- "BETTER FUTURE STARTS HERE" curved or straight -->
+  <text x="250" y="450" 
+        font-family="'Space Grotesk', sans-serif" 
+        font-size="20" 
+        font-weight="700" 
+        letter-spacing="4" 
+        fill="currentColor" 
+        text-anchor="middle">BETTER FUTURE STARTS HERE</text>
+</svg>
