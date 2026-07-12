@@ -2,7 +2,6 @@
    Stanford School — Premium Interactive Script
    ========================================================================== */
 
-document.addEventListener('DOMContentLoaded', () => {
   /* --------------------------------------------------------------------------
      0. Preloader & Screen Reader Safety Controller (Effect 1.1)
      -------------------------------------------------------------------------- */
@@ -95,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }, 50);
 
-      window.addEventListener('load', () => {
+      const handleLoad = () => {
         // Once full page (window) is loaded, complete ticker to 100
         if (progressInterval) clearInterval(progressInterval);
         progressInterval = setInterval(() => {
@@ -109,7 +108,13 @@ document.addEventListener('DOMContentLoaded', () => {
             updatePreloaderPct(currentPct);
           }
         }, 30);
-      });
+      };
+
+      if (document.readyState === 'complete') {
+        handleLoad();
+      } else {
+        window.addEventListener('load', handleLoad);
+      }
     }
 
     function updatePreloaderPct(val) {
@@ -1235,4 +1240,4 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   }
-});
+
