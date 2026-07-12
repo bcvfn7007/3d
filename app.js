@@ -893,8 +893,8 @@
   // Stats Card Reveal
   gsap.from('.stat-card', {
     scrollTrigger: {
-      trigger: '.stats-section',
-      start: 'top 80%',
+      trigger: '.stats-grid',
+      start: 'top 90%',
     },
     opacity: 0,
     y: 50,
@@ -906,8 +906,8 @@
   // Courses Card Reveal (Staggered Grid)
   gsap.from('.course-card', {
     scrollTrigger: {
-      trigger: '.courses-section',
-      start: 'top 75%',
+      trigger: '.courses-grid',
+      start: 'top 90%',
     },
     opacity: 0,
     y: 60,
@@ -923,8 +923,8 @@
 
     gsap.to(bar, {
       scrollTrigger: {
-        trigger: '.results-section',
-        start: 'top 75%',
+        trigger: '.results-grid',
+        start: 'top 90%',
       },
       width: `${targetWidth}%`,
       duration: 1.8,
@@ -950,8 +950,8 @@
 
     gsap.from(card, {
       scrollTrigger: {
-        trigger: '.results-section',
-        start: 'top 75%',
+        trigger: '.results-grid',
+        start: 'top 90%',
       },
       opacity: 0,
       x: startX,
@@ -967,8 +967,8 @@
   // Teachers Cards Reveal
   gsap.from('.teacher-card', {
     scrollTrigger: {
-      trigger: '.teachers-section',
-      start: 'top 75%',
+      trigger: '.teachers-grid',
+      start: 'top 90%',
     },
     opacity: 0,
     y: 50,
@@ -980,8 +980,8 @@
   // Certificates Cards Reveal
   gsap.from('.cert-card-btn', {
     scrollTrigger: {
-      trigger: '.certificates-section',
-      start: 'top 75%',
+      trigger: '.certificates-grid',
+      start: 'top 92%',
     },
     opacity: 0,
     y: 50,
@@ -993,8 +993,8 @@
   // Contact Form Reveal
   gsap.from('.form-info-column', {
     scrollTrigger: {
-      trigger: '.form-section',
-      start: 'top 80%',
+      trigger: '.form-grid',
+      start: 'top 92%',
     },
     opacity: 0,
     x: -50,
@@ -1004,8 +1004,8 @@
   
   gsap.from('.form-field-column', {
     scrollTrigger: {
-      trigger: '.form-section',
-      start: 'top 80%',
+      trigger: '.form-grid',
+      start: 'top 92%',
     },
     opacity: 0,
     x: 50,

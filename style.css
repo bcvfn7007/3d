@@ -1197,6 +1197,10 @@ html.light-theme .course-details {
   border-radius: 25px;
   transition: var(--transition-smooth);
 }
+.course-cta .cta-inner {
+  color: inherit;
+  font-size: inherit;
+}
 .course-card:hover .course-cta {
   background: var(--text-primary);
   color: var(--text-inverse);
