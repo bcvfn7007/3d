@@ -3,6 +3,9 @@
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
+  // Register GSAP plugins
+  gsap.registerPlugin(ScrollTrigger);
+
   
   /* --------------------------------------------------------------------------
      1. Dictionary & Translation Manager
@@ -59,6 +62,8 @@ document.addEventListener('DOMContentLoaded', () => {
       "results.student1.feedback": "\"Благодаря Stanford School поднял балл с 5.5 до 7.5 за 4 месяца! Очень крутой формат тестов по субботам, сразу понимаешь свои слабые зоны.\"",
       "results.student2.name": "Нигора Усманова",
       "results.student2.feedback": "\"Моя цель была поступить в зарубежный вуз. Результат превзошел все ожидания — 8.5! Преподаватели очень требовательные, но это того стоило.\"",
+      "results.student3.name": "Жасур Алимов",
+      "results.student3.feedback": "\"Stanford School — лучший выбор в Ташкенте. Результат 7.0 говорит сам за себя. Особая благодарность преподавателям за отличную методику!\"",
       "results.before": "Было:",
       "results.after": "Стало:",
       "teachers.title": "Наша Команда",
@@ -168,6 +173,8 @@ document.addEventListener('DOMContentLoaded', () => {
       "results.student1.feedback": "\"Stanford School tufayli 4 oy ichida ballimni 5.5 dan 7.5 gacha ko'tardim! Shanba kunidagi testlar formati juda zo'r, zaif tomonlaringizni darhol bilib olasiz.\"",
       "results.student2.name": "Nigora Usmanova",
       "results.student2.feedback": "\"Mening maqsadim chet el universitetiga kirish edi. Natija barcha kutilganlardan oshib ketdi — 8.5! O'qituvchilar juda talabchan, lekin bunga arziydi.\"",
+      "results.student3.name": "Jasur Alimov",
+      "results.student3.feedback": "\"Stanford School — Toshkentdagi eng yaxshi tanlov. Natija 7.0 o'zi uchun gapiradi. O'qituvchilarga ajoyib metodika uchun alohida rahmat!\"",
       "results.before": "Oldin:",
       "results.after": "Keyin:",
       "teachers.title": "Jamoamiz",
@@ -277,6 +284,8 @@ document.addEventListener('DOMContentLoaded', () => {
       "results.student1.feedback": "\"Thanks to Stanford School, I raised my score from 5.5 to 7.5 in 4 months! The Saturday mock tests format is amazing; you immediately understand your weak areas.\"",
       "results.student2.name": "Nigora Usmanova",
       "results.student2.feedback": "\"My goal was to enter a foreign university. The result exceeded all expectations — 8.5! The teachers are very demanding, but it was absolutely worth it.\"",
+      "results.student3.name": "Jasur Alimov",
+      "results.student3.feedback": "\"Stanford School is the best choice in Tashkent. My score of 7.0 speaks for itself. Special thanks to the teachers for the excellent methodology!\"",
       "results.before": "Before:",
       "results.after": "After:",
       "teachers.title": "Our Team",
@@ -602,9 +611,60 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
 
-  /* --------------------------------------------------------------------------
-     6. GSAP Scrolling Animations
-     -------------------------------------------------------------------------- */
+  // Hero Image-Mask Loop Timeline (Effect 1)
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const heroMaskTimeline = gsap.timeline({ repeat: -1, yoyo: true });
+  
+  heroMaskTimeline.to('.hero-mask-after', {
+    clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
+    duration: 4,
+    ease: 'power3.inOut',
+    delay: 2
+  });
+
+  if (prefersReducedMotion) {
+    heroMaskTimeline.pause(0); // Freeze on first frame for a11y compliance
+  }
+
+  // Roscherk SVG flourish scroll-drawing (Effect 2)
+  gsap.fromTo('.svg-flourish-path', 
+    { strokeDashoffset: 2000 },
+    {
+      strokeDashoffset: 0,
+      scrollTrigger: {
+        trigger: '.flourish-transition-container',
+        start: 'top 85%',
+        end: 'bottom 15%',
+        scrub: 1.2
+      }
+    }
+  );
+
+  gsap.from('.flourish-bg-text', {
+    scrollTrigger: {
+      trigger: '.flourish-transition-container',
+      start: 'top 85%',
+      scrub: true
+    },
+    opacity: 0,
+    scale: 0.95,
+    y: 20,
+    ease: 'power2.out'
+  });
+
+  // Cinematic Parallax Divider (Effect 4)
+  gsap.to('.divider-parallax-bg', {
+    scrollTrigger: {
+      trigger: '.cinematic-divider',
+      start: 'top bottom',
+      end: 'bottom top',
+      scrub: true
+    },
+    yPercent: 18,
+    scale: 1.12,
+    ease: 'none'
+  });
+
   // Page Scroll Progress Indicator
   gsap.to('#scroll-progress-bar', {
     scrollTrigger: {
@@ -697,18 +757,37 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Results Cards Reveal
-  gsap.from('.result-card', {
-    scrollTrigger: {
-      trigger: '.results-section',
-      start: 'top 75%',
-    },
-    opacity: 0,
-    y: 50,
-    duration: 1,
-    stagger: 0.2,
-    ease: 'power3.out'
+  // Results Cards Reveal (Asymmetric grid offsets & directions - Effect 3)
+  const resultCards = document.querySelectorAll('.result-card');
+  resultCards.forEach((card, index) => {
+    let startX = 0;
+    let startY = 80;
+    
+    if (index === 0) {
+      startX = -80; // Slide from left
+      startY = 0;
+    } else if (index === 1) {
+      startY = 100; // Slide from bottom
+    } else if (index === 2) {
+      startX = 80; // Slide from right
+      startY = -40; // Offset up
+    }
+
+    gsap.from(card, {
+      scrollTrigger: {
+        trigger: '.results-section',
+        start: 'top 75%',
+      },
+      opacity: 0,
+      x: startX,
+      y: startY,
+      scale: 0.95,
+      duration: 1.2,
+      delay: index * 0.15,
+      ease: 'power4.out'
+    });
   });
+
 
   // Teachers Cards Reveal
   gsap.from('.teacher-card', {

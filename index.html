@@ -159,30 +159,84 @@
       </div>
 
       <div class="content-container hero-content">
-        <!-- Eyebrow with reveal animation -->
-        <div class="hero-eyebrow-wrapper">
-          <span class="eyebrow-text" data-i18n="hero.eyebrow">BETTER FUTURE STARTS HERE</span>
+        <!-- Text Column -->
+        <div class="hero-text-col">
+          <!-- Eyebrow with reveal animation -->
+          <div class="hero-eyebrow-wrapper">
+            <span class="eyebrow-text" data-i18n="hero.eyebrow">BETTER FUTURE STARTS HERE</span>
+          </div>
+          
+          <!-- Heading with Split Character / Word reveal -->
+          <h1 class="hero-title">
+            <span class="word" data-i18n="hero.title_part1">Раскрой</span>
+            <span class="word accent-word">
+              <span class="word-fill" data-i18n="hero.title_part2">Свой</span>
+            </span>
+            <span class="word" data-i18n="hero.title_part3">Английский</span>
+          </h1>
+
+          <!-- Subtitle with line-by-line reveal -->
+          <p class="hero-subtitle" data-i18n="hero.subtitle_text">
+            Премиальный языковой центр в Ташкенте. Мы не продаём уроки — мы гарантируем результат в виде сданных экзаменов и свободного общения.
+          </p>
+
+          <!-- Magnetic CTA Hero -->
+          <div class="hero-cta-wrapper">
+            <a href="#enrollment-form" class="cta-button-hero magnetic-btn" id="hero-cta">
+              <span class="cta-inner" data-i18n="hero.cta">Начать обучение</span>
+            </a>
+          </div>
         </div>
-        
-        <!-- Heading with Split Character / Word reveal -->
-        <h1 class="hero-title">
-          <span class="word" data-i18n="hero.title_part1">Раскрой</span>
-          <span class="word accent-word">
-            <span class="word-fill" data-i18n="hero.title_part2">Свой</span>
-          </span>
-          <span class="word" data-i18n="hero.title_part3">Английский</span>
-        </h1>
 
-        <!-- Subtitle with line-by-line reveal -->
-        <p class="hero-subtitle" data-i18n="hero.subtitle_text">
-          Премиальный языковой центр в Ташкенте. Мы не продаём уроки — мы гарантируем результат в виде сданных экзаменов и свободного общения.
-        </p>
+        <!-- Visual Mask Column (Effect 1) -->
+        <div class="hero-visual-col">
+          <div class="hero-mask-wrapper glass-panel">
+            <!-- "Before" Layer: Muted dark/gray representation of student results -->
+            <div class="hero-mask-layer hero-mask-before">
+              <svg viewBox="0 0 400 450" class="hero-mask-portrait-svg" aria-hidden="true">
+                <defs>
+                  <linearGradient id="beforeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#2d153d" />
+                    <stop offset="100%" stop-color="#150a1f" />
+                  </linearGradient>
+                </defs>
+                <rect width="400" height="450" fill="url(#beforeGrad)" rx="16" />
+                <!-- Stylized geometric student silhouette -->
+                <circle cx="200" cy="180" r="80" fill="rgba(247,239,244,0.1)" stroke="rgba(247,239,244,0.2)" stroke-width="2" />
+                <path d="M 80 380 Q 200 280, 320 380 Z" fill="rgba(247,239,244,0.08)" stroke="rgba(247,239,244,0.15)" stroke-width="2" />
+                <path d="M 170 180 L 190 200 L 230 150" fill="none" stroke="#E53935" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" opacity="0.4" />
+              </svg>
+              <div class="mask-badge before-badge">
+                <span class="badge-sub" data-i18n="results.before">Было:</span>
+                <span class="badge-main">IELTS 5.5</span>
+              </div>
+            </div>
 
-        <!-- Magnetic CTA Hero -->
-        <div class="hero-cta-wrapper">
-          <a href="#enrollment-form" class="cta-button-hero magnetic-btn" id="hero-cta">
-            <span class="cta-inner" data-i18n="hero.cta">Начать обучение</span>
-          </a>
+            <!-- "After" Layer: Glowing colorful representation of same student results -->
+            <div class="hero-mask-layer hero-mask-after">
+              <svg viewBox="0 0 400 450" class="hero-mask-portrait-svg" aria-hidden="true">
+                <defs>
+                  <linearGradient id="afterGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#EC407A" />
+                    <stop offset="50%" stop-color="#C1278C" />
+                    <stop offset="100%" stop-color="#1F0F2C" />
+                  </linearGradient>
+                </defs>
+                <rect width="400" height="450" fill="url(#afterGrad)" rx="16" />
+                <!-- Stylized geometric student silhouette -->
+                <circle cx="200" cy="180" r="80" fill="rgba(252,248,250,0.2)" stroke="rgba(252,248,250,0.4)" stroke-width="2" />
+                <path d="M 80 380 Q 200 280, 320 380 Z" fill="rgba(252,248,250,0.18)" stroke="rgba(252,248,250,0.3)" stroke-width="2" />
+                <path d="M 150 185 L 185 220 L 255 140" fill="none" stroke="#4CAF50" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+              <div class="mask-badge after-badge">
+                <span class="badge-sub" data-i18n="results.after">Стало:</span>
+                <span class="badge-main">IELTS 8.5</span>
+              </div>
+            </div>
+            
+            <!-- Splitting slider indicator line in CSS -->
+            <div class="hero-mask-slider-line" aria-hidden="true"></div>
+          </div>
         </div>
       </div>
 
@@ -327,6 +381,15 @@
       </div>
     </section>
 
+    <!-- Roscherk SVG flourish transition container (Effect 2) -->
+    <div class="flourish-transition-container" aria-hidden="true">
+      <span class="flourish-bg-text">RESULTS</span>
+      <svg viewBox="0 0 1000 200" fill="none" xmlns="http://www.w3.org/2000/svg" class="svg-flourish">
+        <!-- Handwritten-style flourish stroke -->
+        <path d="M 50 150 Q 300 30, 500 120 T 900 80 M 350 70 Q 500 180, 600 50 Q 700 30, 620 120 C 550 180, 300 200, 200 140 Q 100 80, 250 50 Z" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" class="svg-flourish-path" />
+      </svg>
+    </div>
+
     <!-- 4. Results Section (Before/After with animated progress bars) -->
     <section id="results" class="results-section">
       <div class="content-container">
@@ -391,6 +454,34 @@
               "Моя цель была поступить в зарубежный вуз. Результат превзошел все ожидания — 8.5! Преподаватели очень требовательные, но это того стоило."
             </p>
           </div>
+
+          <!-- Result Card 3 (Jasur Alimov - IELTS 5.0 -> 7.0 - Effect 3) -->
+          <div class="result-card glass-panel">
+            <div class="result-student">
+              <span class="student-name" data-i18n="results.student3.name">Жасур Алимов</span>
+              <span class="student-target">Business English & IELTS</span>
+            </div>
+            <div class="score-progress-container">
+              <div class="score-row">
+                <span class="score-label" data-i18n="results.before">Было:</span>
+                <span class="score-val">IELTS 5.0</span>
+              </div>
+              <div class="progress-track" aria-hidden="true">
+                <div class="progress-bar before-bar" data-score="5.0"></div>
+              </div>
+              
+              <div class="score-row final-row">
+                <span class="score-label" data-i18n="results.after">Стало:</span>
+                <span class="score-val accent-text">IELTS 7.0</span>
+              </div>
+              <div class="progress-track" aria-hidden="true">
+                <div class="progress-bar after-bar" data-score="7.0"></div>
+              </div>
+            </div>
+            <p class="student-feedback" data-i18n="results.student3.feedback">
+              "Stanford School — лучший выбор в Ташкенте. Результат 7.0 говорит сам за себя. Особая благодарность преподавателям за отличную методику!"
+            </p>
+          </div>
         </div>
       </div>
     </section>
@@ -446,6 +537,16 @@
             </div>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- Cinematic Parallax Divider (Effect 4) -->
+    <section class="cinematic-divider" aria-hidden="true">
+      <div class="divider-parallax-bg"></div>
+      <div class="divider-overlay-glow"></div>
+      <div class="content-container divider-content">
+        <span class="divider-eyebrow">STANFORD SCHOOL</span>
+        <h2 class="divider-title" data-i18n="hero.eyebrow">BETTER FUTURE STARTS HERE</h2>
       </div>
     </section>
 
