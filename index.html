@@ -4,9 +4,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Stanford School — Better Future Starts Here</title>
+  <title>Stanford School — Better Future Starts Here | Языковой центр в Ташкенте</title>
+  <meta name="description"
+    content="Премиальный языковой центр в Ташкенте. Подготовка к IELTS, General English, Business English. Средний балл выпускников IELTS 8.0. Гарантируем результат.">
+  <meta name="keywords" content="Stanford School, IELTS, языковой центр, Ташкент, English, курсы английского">
+  <meta property="og:title" content="Stanford School — Better Future Starts Here">
+  <meta property="og:description"
+    content="Премиальный языковой центр в Ташкенте. IELTS 8.0+ результаты. Запишись на бесплатный урок.">
 
-  <!-- Prevent FOUC (Flash of Unstyled Content) -->
+  <!-- Prevent FOUC -->
   <script>
     (function () {
       const savedTheme = localStorage.getItem('theme');
@@ -19,15 +25,15 @@
     })();
   </script>
 
-  <!-- Google Fonts: Unbounded (Geometrical headings), Manrope (Body text), Space Grotesk (Labels & Stats) -->
+  <!-- Google Fonts: Unbounded, Manrope, Space Grotesk -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;700&amp;family=Unbounded:wght@400;700;900&amp;display=swap"
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&family=Unbounded:wght@400;700;900&display=swap"
     rel="stylesheet">
 
   <!-- Core Styles -->
-  <link rel="stylesheet" href="style.css?v=1.0.5">
+  <link rel="stylesheet" href="style.css?v=2.0.0">
 
   <!-- Lenis for Smooth Scrolling -->
   <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
@@ -42,22 +48,34 @@
 
 <body>
 
-  <!-- Cinematic Percentage Preloader (Session Persistent & Safe Fallback - Effect 1.1) -->
+  <!-- Cinematic Preloader -->
   <div id="preloader" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-live="polite">
     <div class="preloader-content">
+      <!-- Logo mark -->
+      <svg class="preloader-logo-anim" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="60" height="60" aria-hidden="true">
+        <circle cx="250" cy="250" r="220" fill="none" stroke="currentColor" stroke-width="24" />
+        <circle cx="250" cy="250" r="190" fill="none" stroke="currentColor" stroke-width="8" />
+        <g fill="currentColor">
+          <path d="M 330 140 L 210 140 A 50 50 0 0 0 160 190 A 50 50 0 0 0 210 240 L 290 240 A 50 50 0 0 1 340 290 A 50 50 0 0 1 290 340 L 230 340 L 230 380 L 290 380 A 90 90 0 0 0 380 290 A 90 90 0 0 0 290 200 L 210 200 A 10 10 0 0 1 200 190 A 10 10 0 0 1 210 180 L 330 180 Z" />
+          <path d="M 230 340 L 170 340 L 205 305 Z" />
+          <path d="M 170 340 L 120 390 L 170 410 Z" />
+          <path d="M 120 390 L 100 410 L 125 415 L 140 400 Z" />
+        </g>
+      </svg>
       <div class="preloader-text-wrapper">
         <span id="preloader-counter">00</span><span class="pct">%</span>
       </div>
       <div class="preloader-progress-track">
         <div id="preloader-progress-bar"></div>
       </div>
+      <span class="preloader-label">Stanford School — Loading</span>
     </div>
   </div>
 
-  <!-- Main Application Wrapper for Focus & SR Containment -->
+  <!-- Main Application Wrapper -->
   <div id="app-content" inert aria-hidden="true">
 
-    <!-- Custom Spotlight Cursor (Hidden on Touch Devices) -->
+    <!-- Custom Spotlight Cursor -->
     <div id="custom-cursor" class="custom-cursor" aria-hidden="true">
       <div class="cursor-dot"></div>
       <div class="cursor-circle">
@@ -65,25 +83,23 @@
       </div>
     </div>
 
-    <!-- Ambient Light Spotlight (Follows mouse on Desktop) -->
+    <!-- Ambient Light Spotlight -->
     <div id="ambient-spotlight" class="ambient-spotlight" aria-hidden="true"></div>
 
-    <!-- Global Noise Overlay (Premium paper/grain texture) -->
+    <!-- Global Noise Overlay -->
     <div class="grain-overlay" aria-hidden="true"></div>
 
     <!-- Header & Navigation -->
-    <header class="main-header glass-panel">
+    <header class="main-header glass-panel" id="main-header">
       <div class="nav-container">
-        <!-- Logo Monogram inline SVG -->
+        <!-- Logo -->
         <a href="#hero" class="logo-link" aria-label="Stanford School Logo">
           <div class="logo-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="40" height="40" aria-hidden="true">
               <circle cx="250" cy="250" r="220" fill="none" stroke="currentColor" stroke-width="24" />
-              <circle cx="250" cy="250" r="190" fill="none" stroke="currentColor" stroke-width="8"
-                stroke-dasharray="1 0" />
+              <circle cx="250" cy="250" r="190" fill="none" stroke="currentColor" stroke-width="8" />
               <g fill="currentColor">
-                <path
-                  d="M 330 140 L 210 140 A 50 50 0 0 0 160 190 A 50 50 0 0 0 210 240 L 290 240 A 50 50 0 0 1 340 290 A 50 50 0 0 1 290 340 L 230 340 L 230 380 L 290 380 A 90 90 0 0 0 380 290 A 90 90 0 0 0 290 200 L 210 200 A 10 10 0 0 1 200 190 A 10 10 0 0 1 210 180 L 330 180 Z" />
+                <path d="M 330 140 L 210 140 A 50 50 0 0 0 160 190 A 50 50 0 0 0 210 240 L 290 240 A 50 50 0 0 1 340 290 A 50 50 0 0 1 290 340 L 230 340 L 230 380 L 290 380 A 90 90 0 0 0 380 290 A 90 90 0 0 0 290 200 L 210 200 A 10 10 0 0 1 200 190 A 10 10 0 0 1 210 180 L 330 180 Z" />
                 <path d="M 230 340 L 170 340 L 205 305 Z" />
                 <path d="M 170 340 L 120 390 L 170 410 Z" />
                 <path d="M 120 390 L 100 410 L 125 415 L 140 400 Z" />
@@ -106,7 +122,7 @@
           </ul>
         </nav>
 
-        <!-- Right Header Actions (Theme, Language, CTA) -->
+        <!-- Right Header Actions -->
         <div class="header-actions">
           <!-- Theme Toggle -->
           <button id="theme-toggle" class="theme-toggle magnetic" aria-label="Переключить тему" aria-pressed="false">
@@ -132,7 +148,7 @@
           <!-- Magnetic Header CTA -->
           <a href="#enrollment-form" class="cta-button-nav magnetic" data-i18n="nav.cta">Записаться</a>
 
-          <!-- Mobile Menu Toggle Button -->
+          <!-- Mobile Menu Toggle -->
           <button id="mobile-menu-toggle" class="mobile-menu-toggle" aria-label="Открыть меню" aria-expanded="false">
             <span class="hamburger-bar"></span>
             <span class="hamburger-bar"></span>
@@ -142,7 +158,7 @@
       </div>
     </header>
 
-    <!-- Mobile Dropdown Navigation Menu -->
+    <!-- Mobile Dropdown Navigation -->
     <div id="mobile-nav" class="mobile-nav glass-panel" aria-hidden="true">
       <div class="mobile-nav-content">
         <ul class="mobile-nav-links">
@@ -162,7 +178,7 @@
       </div>
     </div>
 
-    <!-- Page Scroll Indicator (Progress bar at the top) -->
+    <!-- Page Scroll Progress -->
     <div class="scroll-progress-container" aria-hidden="true">
       <div id="scroll-progress-bar" class="scroll-progress-bar"></div>
     </div>
@@ -172,19 +188,17 @@
       <section id="hero" class="hero-section">
         <!-- 3D Scene Wrapper -->
         <div class="hero-3d-container">
-          <!-- Live Spline Scene (Loaded asynchronously) -->
           <div id="spline-wrapper" class="spline-wrapper">
-            <!-- We supply a known responsive public Spline URL from community that matches our color palette or is elegant.
-               We attach Scroll events in JS to update rotation based on scroll position. -->
             <spline-viewer url="https://prod.spline.design/6Wq1Q7YGy42kmO2z/scene.splinecode"
               background="transparent"></spline-viewer>
           </div>
-          <!-- High-quality CSS Gradient + Noise Fallback Poster -->
+          <!-- CSS Gradient Fallback -->
           <div class="hero-fallback-bg">
             <div class="glow-blob blob-1"></div>
             <div class="glow-blob blob-2"></div>
+            <div class="glow-blob blob-3"></div>
           </div>
-          <!-- Gradient Scrim for Content Contrast -->
+          <!-- Gradient Scrim -->
           <div class="hero-scrim"></div>
         </div>
 
@@ -196,7 +210,7 @@
               <span class="eyebrow-text" data-i18n="hero.eyebrow">BETTER FUTURE STARTS HERE</span>
             </div>
 
-            <!-- Heading with Split Character / Word reveal -->
+            <!-- Heading with Split Word reveal -->
             <h1 class="hero-title">
               <span class="word" data-i18n="hero.title_part1">Раскрой</span>
               <span class="word accent-word">
@@ -205,11 +219,38 @@
               <span class="word" data-i18n="hero.title_part3">Английский</span>
             </h1>
 
-            <!-- Subtitle with line-by-line reveal -->
+            <!-- Subtitle -->
             <p class="hero-subtitle" data-i18n="hero.subtitle_text">
               Премиальный языковой центр в Ташкенте. Мы не продаём уроки — мы гарантируем результат в виде сданных
               экзаменов и свободного общения.
             </p>
+
+            <!-- Quick chips / stats -->
+            <div class="hero-chips">
+              <span class="hero-chip">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                IELTS 8.0+ средний балл
+              </span>
+              <span class="hero-chip">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="9" cy="7" r="4"></circle>
+                </svg>
+                Max 8 студентов в группе
+              </span>
+              <span class="hero-chip">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <polyline points="12 6 12 12 16 14"></polyline>
+                </svg>
+                С 2015 года
+              </span>
+            </div>
 
             <!-- Magnetic CTA Hero -->
             <div class="hero-cta-wrapper">
@@ -219,73 +260,43 @@
             </div>
           </div>
 
-          <!-- Visual Mask Column (Effect 1) -->
+          <!-- Visual Column: floating stat cards -->
           <div class="hero-visual-col">
-            <div class="hero-mask-wrapper glass-panel">
-              <!-- "Before" Layer: Muted dark/gray representation of student results -->
-              <div class="hero-mask-layer hero-mask-before">
-                <svg viewBox="0 0 400 450" class="hero-mask-portrait-svg" aria-hidden="true">
-                  <defs>
-                    <linearGradient id="beforeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stop-color="#2d153d" />
-                      <stop offset="100%" stop-color="#150a1f" />
-                    </linearGradient>
-                  </defs>
-                  <rect width="400" height="450" fill="url(#beforeGrad)" rx="16" />
-                  <!-- Stylized geometric student silhouette -->
-                  <circle cx="200" cy="180" r="80" fill="rgba(247,239,244,0.1)" stroke="rgba(247,239,244,0.2)"
-                    stroke-width="2" />
-                  <path d="M 80 380 Q 200 280, 320 380 Z" fill="rgba(247,239,244,0.08)" stroke="rgba(247,239,244,0.15)"
-                    stroke-width="2" />
-                  <path d="M 170 180 L 190 200 L 230 150" fill="none" stroke="#E53935" stroke-width="6"
-                    stroke-linecap="round" stroke-linejoin="round" opacity="0.4" />
-                </svg>
-                <div class="mask-badge before-badge">
-                  <span class="badge-sub" data-i18n="results.before">Было:</span>
-                  <span class="badge-main">IELTS 5.5</span>
-                </div>
+            <div class="hero-float-cards">
+
+              <div class="hero-float-card hfc-1">
+                <span class="hfc-big">8.5</span>
+                <span class="hfc-label">IELTS · Азиз Каримов</span>
+                <span class="hfc-sub">было 5.5 → стало 8.5 ✦</span>
               </div>
 
-              <!-- "After" Layer: Glowing colorful representation of same student results -->
-              <div class="hero-mask-layer hero-mask-after">
-                <svg viewBox="0 0 400 450" class="hero-mask-portrait-svg" aria-hidden="true">
-                  <defs>
-                    <linearGradient id="afterGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stop-color="#EC407A" />
-                      <stop offset="50%" stop-color="#C1278C" />
-                      <stop offset="100%" stop-color="#1F0F2C" />
-                    </linearGradient>
-                  </defs>
-                  <rect width="400" height="450" fill="url(#afterGrad)" rx="16" />
-                  <!-- Stylized geometric student silhouette -->
-                  <circle cx="200" cy="180" r="80" fill="rgba(252,248,250,0.2)" stroke="rgba(252,248,250,0.4)"
-                    stroke-width="2" />
-                  <path d="M 80 380 Q 200 280, 320 380 Z" fill="rgba(252,248,250,0.18)" stroke="rgba(252,248,250,0.3)"
-                    stroke-width="2" />
-                  <path d="M 150 185 L 185 220 L 255 140" fill="none" stroke="#4CAF50" stroke-width="8"
-                    stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
-                <div class="mask-badge after-badge">
-                  <span class="badge-sub" data-i18n="results.after">Стало:</span>
-                  <span class="badge-main">IELTS 8.5</span>
-                </div>
+              <div class="hero-float-card hfc-2">
+                <span class="hfc-big">100%</span>
+                <span class="hfc-label">Выпускники с IELTS 7+</span>
+                <span class="hfc-sub">Гарантия результата</span>
               </div>
 
-              <!-- Splitting slider indicator line in CSS -->
-              <div class="hero-mask-slider-line" aria-hidden="true"></div>
+              <div class="hero-float-card hfc-3">
+                <span class="hfc-big">8</span>
+                <span class="hfc-label">студентов в группе</span>
+                <span class="hfc-sub">максимум · персонально</span>
+              </div>
+
             </div>
           </div>
-        </div>
 
-        <!-- Animated Scroll Down Indicator -->
-        <a href="#stats" class="scroll-down-indicator" aria-label="Прокрутить к показателям">
-          <span class="scroll-mouse">
-            <span class="scroll-wheel"></span>
-          </span>
-        </a>
+
+
+          <!-- Scroll Down Indicator -->
+          <a href="#stats" class="scroll-down-indicator" aria-label="Прокрутить к показателям">
+            <span class="scroll-down-label">Скролл</span>
+            <span class="scroll-mouse">
+              <span class="scroll-wheel"></span>
+            </span>
+          </a>
       </section>
 
-      <!-- 2. Stats Section (Glassmorphic cards with 3D tilt) -->
+      <!-- 2. Stats Section -->
       <section id="stats" class="stats-section">
         <div class="content-container">
           <div class="stats-grid">
@@ -336,7 +347,7 @@
         </div>
       </section>
 
-      <!-- 3. Courses Section (Grid of course cards, staggered reveal) -->
+      <!-- 3. Courses Section -->
       <section id="courses" class="courses-section">
         <div class="content-container">
           <h2 class="section-title">
@@ -450,19 +461,17 @@
         </div>
       </section>
 
-      <!-- Roscherk SVG flourish transition container (Effect 2) -->
+      <!-- Flourish SVG Transition -->
       <div class="flourish-transition-container" aria-hidden="true">
         <span class="flourish-bg-text">RESULTS</span>
-        <svg viewBox="0 0 1000 200" fill="none" xmlns="http://www.w3.org/2000/svg" class="svg-flourish">
-          <!-- Handwritten-style flourish stroke -->
-          <path
-            d="M 50 150 Q 300 30, 500 120 T 900 80 M 350 70 Q 500 180, 600 50 Q 700 30, 620 120 C 550 180, 300 200, 200 140 Q 100 80, 250 50 Z"
-            stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"
+        <svg viewBox="0 0 1100 160" fill="none" xmlns="http://www.w3.org/2000/svg" class="svg-flourish">
+          <path d="M 10 80 C 120 20, 280 140, 460 80 C 640 20, 800 140, 980 80 C 1030 60, 1070 65, 1090 80"
+            stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"
             class="svg-flourish-path" />
         </svg>
       </div>
 
-      <!-- 4. Results Section (Before/After with animated progress bars) -->
+      <!-- 4. Results Section -->
       <section id="results" class="results-section">
         <div class="content-container">
           <h2 class="section-title">
@@ -485,7 +494,6 @@
                 <div class="progress-track" aria-hidden="true">
                   <div class="progress-bar before-bar" data-score="5.5"></div>
                 </div>
-
                 <div class="score-row final-row">
                   <span class="score-label" data-i18n="results.after">Стало:</span>
                   <span class="score-val accent-text">IELTS <span class="countup-num"
@@ -515,7 +523,6 @@
                 <div class="progress-track" aria-hidden="true">
                   <div class="progress-bar before-bar" data-score="6.0"></div>
                 </div>
-
                 <div class="score-row final-row">
                   <span class="score-label" data-i18n="results.after">Стало:</span>
                   <span class="score-val accent-text">IELTS <span class="countup-num"
@@ -531,7 +538,7 @@
               </p>
             </div>
 
-            <!-- Result Card 3 (Jasur Alimov - IELTS 5.0 -> 7.0 - Effect 3) -->
+            <!-- Result Card 3 -->
             <div class="result-card glass-panel">
               <div class="result-student">
                 <span class="student-name" data-i18n="results.student3.name">Жасур Алимов</span>
@@ -545,7 +552,6 @@
                 <div class="progress-track" aria-hidden="true">
                   <div class="progress-bar before-bar" data-score="5.0"></div>
                 </div>
-
                 <div class="score-row final-row">
                   <span class="score-label" data-i18n="results.after">Стало:</span>
                   <span class="score-val accent-text">IELTS <span class="countup-num"
@@ -564,7 +570,7 @@
         </div>
       </section>
 
-      <!-- 5. Teachers Section (Compliant placeholders & stylized cards) -->
+      <!-- 5. Teachers Section -->
       <section id="teachers" class="teachers-section">
         <div class="content-container">
           <h2 class="section-title">
@@ -625,17 +631,28 @@
         </div>
       </section>
 
-      <!-- Cinematic Parallax Divider (Effect 4) -->
+      <!-- Cinematic Parallax Divider -->
       <section class="cinematic-divider" aria-hidden="true">
         <div class="divider-parallax-bg"></div>
         <div class="divider-overlay-glow"></div>
+        <!-- Floating particles -->
+        <div class="divider-particles">
+          <div class="divider-particle"></div>
+          <div class="divider-particle"></div>
+          <div class="divider-particle"></div>
+          <div class="divider-particle"></div>
+          <div class="divider-particle"></div>
+          <div class="divider-particle"></div>
+          <div class="divider-particle"></div>
+          <div class="divider-particle"></div>
+        </div>
         <div class="content-container divider-content">
           <span class="divider-eyebrow">STANFORD SCHOOL</span>
           <h2 class="divider-title" data-i18n="hero.eyebrow">BETTER FUTURE STARTS HERE</h2>
         </div>
       </section>
 
-      <!-- 6. Certificates Gallery Section (Compliant watermarked SVGs + Lightbox) -->
+      <!-- 6. Certificates Gallery Section -->
       <section id="certificates" class="certificates-section">
         <div class="content-container">
           <h2 class="section-title">
@@ -657,6 +674,7 @@
                   alt="Образец сертификата IELTS 8.5 на имя Behzod Oliyev" loading="lazy"
                   data-i18n-alt="certificates.c1.alt">
                 <div class="cert-overlay"></div>
+                <div class="cert-open-hint">Открыть ↗</div>
               </div>
               <div class="cert-info">
                 <span class="cert-student" data-i18n="certificates.c1.student">Бехзод Алиев</span>
@@ -673,6 +691,7 @@
                   alt="Образец сертификата IELTS 7.5 на имя Sherzod Tursunov" loading="lazy"
                   data-i18n-alt="certificates.c2.alt">
                 <div class="cert-overlay"></div>
+                <div class="cert-open-hint">Открыть ↗</div>
               </div>
               <div class="cert-info">
                 <span class="cert-student" data-i18n="certificates.c2.student">Шерзод Турсунов</span>
@@ -689,6 +708,7 @@
                   alt="Образец сертификата об окончании уровня C1 на имя Madina Saidova" loading="lazy"
                   data-i18n-alt="certificates.c3.alt">
                 <div class="cert-overlay"></div>
+                <div class="cert-open-hint">Открыть ↗</div>
               </div>
               <div class="cert-info">
                 <span class="cert-student" data-i18n="certificates.c3.student">Мадина Саидова</span>
@@ -699,7 +719,7 @@
         </div>
       </section>
 
-      <!-- 7. Enrollment Contact Form (Uzbekistan validation) -->
+      <!-- 7. Enrollment Contact Form -->
       <section id="enrollment-form" class="form-section">
         <div class="content-container form-wrapper glass-panel">
           <div class="form-grid">
@@ -784,7 +804,8 @@
           <!-- Brand Info -->
           <div class="footer-brand">
             <div class="logo-link">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="30" height="30" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="32" height="32" aria-hidden="true"
+                style="color:var(--brand-fuchsia)">
                 <circle cx="250" cy="250" r="220" fill="none" stroke="currentColor" stroke-width="24" />
                 <g fill="currentColor">
                   <path
@@ -831,29 +852,22 @@
           <p class="copyright" data-i18n="footer.copyright">© 2026 Stanford School. Все права защищены. Лицензия Узб
             №409-12.</p>
           <div class="developer-credit">
-            <span data-i18n="footer.developer">Разработано по стандартам</span> <span
-              class="premium-badge">Awwwards</span>
+            <span data-i18n="footer.developer">Разработано по стандартам</span>
+            <span class="premium-badge">Awwwards</span>
           </div>
         </div>
       </div>
     </footer>
 
-    <!-- Lightbox Modal Dialog (WCAG compliant dialog structure) -->
+    <!-- Lightbox Modal Dialog -->
     <div id="cert-lightbox" class="lightbox-modal" role="dialog" aria-modal="true" aria-hidden="true"
       aria-labelledby="lightbox-title">
-      <!-- Screen reader label for accessibility -->
       <h2 id="lightbox-title" class="sr-only" data-i18n="lightbox.sr_title">Образец сертификата во весь экран</h2>
-
-      <!-- Lightbox Backdrop overlay -->
       <div class="lightbox-backdrop" id="lightbox-close-backdrop"></div>
-
       <div class="lightbox-content-wrapper">
-        <!-- Image frame -->
         <div class="lightbox-image-box">
           <img id="lightbox-img" src="" alt="" class="lightbox-img">
         </div>
-
-        <!-- Close button (focus managed, semantic markup) -->
         <button id="lightbox-close-btn" class="lightbox-close-btn" aria-label="Закрыть во весь экран"
           data-i18n-aria-label="lightbox.close_aria">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -868,7 +882,7 @@
   </div> <!-- Close #app-content -->
 
   <!-- Main JavaScript File -->
-  <script type="module" src="app.js?v=1.0.5"></script>
+  <script type="module" src="app.js?v=2.0.0"></script>
 </body>
 
 </html>
