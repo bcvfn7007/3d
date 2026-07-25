@@ -1,45 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%">
-  <!-- Double Concentric Outer Rings -->
-  <circle cx="250" cy="185" r="165" fill="none" stroke="currentColor" stroke-width="14" />
-  <circle cx="250" cy="185" r="148" fill="none" stroke="currentColor" stroke-width="4" />
+  <!-- Thin Circular Ring -->
+  <circle cx="250" cy="250" r="210" fill="none" stroke="currentColor" stroke-width="12" />
 
-  <!-- Monogram S with Stylized Pencil -->
-  <g fill="currentColor">
-    <!-- Main S Monogram Body -->
-    <path d="M 175 110 
-             L 325 78 
-             L 325 112 
-             L 235 112 
-             L 300 190 
-             A 45 45 0 0 1 335 245 
-             A 45 45 0 0 1 295 295 
-             C 260 325 200 325 170 300 
-             L 170 262 
-             C 200 282 250 285 275 268 
-             A 18 18 0 0 0 290 245 
-             A 18 18 0 0 0 275 225 
-             L 215 155 
-             L 175 155 
-             Z" />
-
-    <!-- Pencil Shaft & Lead Tip (Bottom Left of S) -->
-    <path d="M 160 270 L 205 215 L 225 240 L 180 295 Z" />
-    <path d="M 205 215 L 220 198 L 225 240 Z" />
-  </g>
-
-  <!-- Text inside bottom of circle -->
-  <text x="250" y="325" 
-        font-family="'Space Grotesk', 'Manrope', sans-serif" 
-        font-size="14" 
-        font-weight="800" 
-        letter-spacing="5" 
-        fill="currentColor" 
-        text-anchor="middle">BETTER FUTURE</text>
-  <text x="250" y="343" 
-        font-family="'Space Grotesk', 'Manrope', sans-serif" 
-        font-size="14" 
-        font-weight="800" 
-        letter-spacing="5" 
-        fill="currentColor" 
-        text-anchor="middle">STARTS HERE</text>
+  <!-- Geometric Continuous Ribbon Monogram S -->
+  <path d="M 160 178 H 300 A 36 36 0 0 1 336 214 A 36 36 0 0 1 300 250 H 200 A 36 36 0 0 0 164 286 A 36 36 0 0 0 200 322 H 340" fill="none" stroke="currentColor" stroke-width="36" stroke-linecap="round" stroke-linejoin="round" />
 </svg>
