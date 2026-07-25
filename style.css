@@ -1729,6 +1729,7 @@ html.light-theme .score-mini-track {
   grid-template-columns: 1fr;
   gap: 24px;
   margin-top: 16px;
+  align-items: stretch;
 }
 
 .course-card {
@@ -1736,7 +1737,8 @@ html.light-theme .score-mini-track {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: 360px;
+  height: 100%;
+  min-height: 340px;
   position: relative;
   overflow: hidden;
   transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),

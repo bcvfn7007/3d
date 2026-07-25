@@ -911,13 +911,13 @@ if (typeof gsap !== 'undefined') {
   // ── Courses Grid Staggered Entry ──────────────────────────────────────────
   if (document.querySelector('.course-card') && document.querySelector('.courses-grid')) {
     gsap.from('.course-card', {
-      scrollTrigger: { trigger: '.courses-grid', start: 'top 88%' },
+      scrollTrigger: { trigger: '.courses-grid', start: 'top 85%', once: true },
       opacity: 0,
-      y: 70,
-      scale: 0.96,
-      duration: 0.9,
-      stagger: { amount: 0.6, grid: 'auto', from: 'start' },
-      ease: 'power4.out'
+      y: 50,
+      duration: 0.85,
+      stagger: 0.1,
+      ease: 'power3.out',
+      clearProps: 'transform,opacity'
     });
   }
 
@@ -946,37 +946,40 @@ if (typeof gsap !== 'undefined') {
   // ── Results Cards: Asymmetric directional reveals ─────────────────────────
   const resultCards = document.querySelectorAll('.result-card');
   const directions = [
-    { x: -90, y: 0, scale: 0.95 },    // Card 1: from left
-    { x: 0,   y: 90, scale: 0.95 },   // Card 2: from below
-    { x: 90,  y: 0, scale: 0.95 }     // Card 3: from right
+    { x: -60, y: 0 },   // Card 1: from left
+    { x: 0,   y: 60 },  // Card 2: from below
+    { x: 60,  y: 0 }    // Card 3: from right
   ];
   resultCards.forEach((card, i) => {
-    const d = directions[i] || { x: 0, y: 80, scale: 0.95 };
+    const d = directions[i] || { x: 0, y: 60 };
     gsap.from(card, {
-      scrollTrigger: { trigger: '.results-grid', start: 'top 88%' },
-      opacity: 0, x: d.x, y: d.y, scale: d.scale,
-      duration: 1.2, delay: i * 0.15, ease: 'power4.out'
+      scrollTrigger: { trigger: '.results-grid', start: 'top 85%', once: true },
+      opacity: 0, x: d.x, y: d.y,
+      duration: 1, delay: i * 0.12, ease: 'power3.out',
+      clearProps: 'transform,opacity'
     });
   });
 
   // ── Teachers Cards Reveal ─────────────────────────────────────────────────
   if (document.querySelector('.teacher-card') && document.querySelector('.teachers-grid')) {
     gsap.from('.teacher-card', {
-      scrollTrigger: { trigger: '.teachers-grid', start: 'top 88%' },
-      opacity: 0, y: 55, scale: 0.97,
-      duration: 1, stagger: 0.16, ease: 'power3.out'
+      scrollTrigger: { trigger: '.teachers-grid', start: 'top 85%', once: true },
+      opacity: 0, y: 50,
+      duration: 0.9, stagger: 0.12, ease: 'power3.out',
+      clearProps: 'transform,opacity'
     });
   }
 
-  // ── Certificates Cards Reveal (fan effect) ────────────────────────────────
+  // ── Certificates Cards Reveal ─────────────────────────────────────────────
   const certCards = document.querySelectorAll('.cert-card-btn');
   certCards.forEach((card, i) => {
-    const rotations = [-4, 0, 4];
+    const rotations = [-3, 0, 3];
     if (document.querySelector('.certificates-grid')) {
       gsap.from(card, {
-        scrollTrigger: { trigger: '.certificates-grid', start: 'top 90%' },
-        opacity: 0, y: 60, rotate: rotations[i] || 0, scale: 0.95,
-        duration: 1, delay: i * 0.15, ease: 'power3.out'
+        scrollTrigger: { trigger: '.certificates-grid', start: 'top 88%', once: true },
+        opacity: 0, y: 50, rotate: rotations[i] || 0,
+        duration: 0.9, delay: i * 0.12, ease: 'power3.out',
+        clearProps: 'transform,opacity'
       });
     }
   });
