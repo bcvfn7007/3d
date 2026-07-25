@@ -531,13 +531,17 @@ applyTheme(initialTheme);
 
 
 /* --------------------------------------------------------------------------
-   3. Smooth Inertial Scrolling (Lenis)
+   3. Smooth Inertial Scrolling (Lenis) — Desktop only for native mobile perf
    -------------------------------------------------------------------------- */
+const isMobileDevice = window.innerWidth < 768 || ('ontouchstart' in window && window.innerWidth < 1024);
+
+// Only initialize Lenis on desktop — mobile native scroll is smoother and faster
 const lenis = new Lenis({
-  duration: 1.25,
+  duration: isMobileDevice ? 0.6 : 1.2,
   easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-  smoothWheel: true,
-  smoothTouch: false
+  smoothWheel: !isMobileDevice,
+  smoothTouch: false,  // Always false — native touch is better
+  touchMultiplier: 1,
 });
 
 if (typeof ScrollTrigger !== 'undefined') {

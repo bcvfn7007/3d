@@ -3089,9 +3089,29 @@ a.contact-desc:hover {
 }
 
 /* ==========================================================================
-   13. Responsive Media Queries
+   13. Responsive Breakpoints — Full Rewrite for Mobile Excellence
    ========================================================================== */
 
+/* ── Tablet portrait & large phones (≥ 600px) ──────────────────────────── */
+@media (min-width: 600px) {
+  .stats-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .courses-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .teachers-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .certificates-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ── Tablet landscape (≥ 768px) ─────────────────────────────────────────── */
 @media (min-width: 768px) {
   .stats-grid {
     grid-template-columns: repeat(3, 1fr);
@@ -3119,6 +3139,14 @@ a.contact-desc:hover {
     transform: translateY(-12px);
   }
 
+  .result-card:nth-child(2):hover {
+    transform: translateY(14px) !important;
+  }
+
+  .result-card:nth-child(3):hover {
+    transform: translateY(-20px) !important;
+  }
+
   .teachers-grid {
     grid-template-columns: repeat(3, 1fr);
   }
@@ -3142,6 +3170,7 @@ a.contact-desc:hover {
   }
 }
 
+/* ── Desktop (≥ 1024px) ─────────────────────────────────────────────────── */
 @media (min-width: 1024px) {
   .desktop-nav {
     display: block;
@@ -3164,7 +3193,7 @@ a.contact-desc:hover {
     grid-template-columns: repeat(3, 1fr);
   }
 
-  /* Cursors only shown on Desktop */
+  /* Cursors only shown on Desktop with real mouse */
   .custom-cursor {
     display: block;
   }
@@ -3174,6 +3203,7 @@ a.contact-desc:hover {
   }
 }
 
+/* ── Force-hide cursor on all touch/mobile ──────────────────────────────── */
 @media (max-width: 1023px) {
   .custom-cursor,
   .ambient-spotlight {
@@ -3183,31 +3213,41 @@ a.contact-desc:hover {
   }
 }
 
+/* ── Mobile (≤ 767px) — Main mobile overrides ───────────────────────────── */
 @media (max-width: 767px) {
-  /* Mobile Performance: Hide WebGL 3D canvas for buttery smooth 60 FPS */
+  /* Performance: Hide heavy WebGL 3D scene */
   .spline-wrapper {
     display: none !important;
   }
 
-  .flourish-transition-container {
-    height: 110px !important;
-    overflow: hidden !important;
+  /* Performance: Stop blob animations on mobile — they kill battery */
+  .glow-blob {
+    animation: none !important;
+    will-change: auto !important;
   }
 
-  .flourish-bg-text {
-    font-size: clamp(1.8rem, 8vw, 3.2rem) !important;
-    letter-spacing: 3px !important;
-    max-width: 100% !important;
-    overflow: hidden !important;
-    white-space: nowrap !important;
-  }
-
+  /* Performance: Reduce blur cost */
   .glass-panel {
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
   }
 
-  /* Mobile Header */
+  /* ─── Flourish section fix ─── */
+  .flourish-transition-container {
+    height: 90px !important;
+    overflow: hidden !important;
+  }
+
+  .flourish-bg-text {
+    font-size: clamp(2rem, 10vw, 3.5rem) !important;
+    letter-spacing: 4px !important;
+    max-width: 100vw !important;
+    overflow: hidden !important;
+    white-space: nowrap !important;
+    text-overflow: ellipsis !important;
+  }
+
+  /* ─── Header mobile ─── */
   .main-header {
     top: 10px;
     left: 3%;
@@ -3262,7 +3302,7 @@ a.contact-desc:hover {
     flex-shrink: 0;
   }
 
-  /* Mobile Nav Overlay */
+  /* ─── Mobile Nav Overlay ─── */
   .mobile-nav {
     position: fixed;
     top: 75px;
@@ -3274,21 +3314,29 @@ a.contact-desc:hover {
     border-radius: 24px;
   }
 
-  /* Mobile Hero */
+  /* ─── Hero section mobile ─── */
   .hero-section {
-    padding-top: 105px;
-    padding-bottom: 50px;
+    padding-top: 90px;
+    padding-bottom: 40px;
     min-height: auto;
   }
 
   .hero-content {
     grid-template-columns: 1fr;
-    gap: 32px;
+    gap: 28px;
+    padding-bottom: 0;
   }
 
   .hero-text-col {
     align-items: center;
     text-align: center;
+    order: 1;
+  }
+
+  /* Visual column (floating cards) goes below text on mobile */
+  .hero-visual-col {
+    order: 2;
+    width: 100%;
   }
 
   .hero-eyebrow-wrapper {
@@ -3296,17 +3344,18 @@ a.contact-desc:hover {
   }
 
   .eyebrow-text {
-    font-size: 0.65rem;
-    letter-spacing: 2.5px;
+    font-size: 0.62rem;
+    letter-spacing: 2px;
   }
 
   .hero-title {
-    font-size: clamp(1.8rem, 7.5vw, 2.7rem);
+    font-size: clamp(1.85rem, 7.5vw, 2.8rem);
     line-height: 1.15;
+    letter-spacing: -1px;
   }
 
   .hero-subtitle {
-    font-size: 0.92rem;
+    font-size: 0.9rem;
     line-height: 1.6;
     max-width: 100%;
   }
@@ -3315,95 +3364,174 @@ a.contact-desc:hover {
     justify-content: center;
     gap: 8px;
     width: 100%;
+    flex-wrap: wrap;
   }
 
   .hero-chip {
-    padding: 8px 14px;
-    font-size: 0.76rem;
+    padding: 7px 14px;
+    font-size: 0.74rem;
   }
 
   .hero-cta-wrapper {
     justify-content: center;
     width: 100%;
+    display: flex;
   }
 
   .cta-button-hero {
     width: 100%;
-    max-width: 300px;
+    max-width: 280px;
     text-align: center;
     padding: 15px 24px;
     font-size: 0.95rem;
+    justify-content: center;
   }
 
+  /* Hero float cards — compact horizontal layout on mobile */
   .hero-float-cards {
     max-width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
   }
 
   .hero-float-card {
-    padding: 18px 20px;
+    padding: 16px 14px;
+    border-radius: 16px;
+  }
+
+  /* 3rd card spans full width */
+  .hero-float-card:nth-child(3) {
+    grid-column: 1 / -1;
   }
 
   .hfc-big {
-    font-size: 2.1rem;
+    font-size: 1.8rem;
+  }
+
+  .hfc-label {
+    font-size: 0.72rem;
+    margin-top: 2px;
+  }
+
+  .hfc-sub {
+    font-size: 0.6rem;
+  }
+
+  /* Disable floating animations on mobile for performance */
+  .hfc-1, .hfc-2, .hfc-3 {
+    animation: none !important;
+  }
+
+  /* Hide hero score card on mobile — show float cards instead */
+  .hero-score-card {
+    display: none;
   }
 
   .scroll-down-indicator {
     display: none;
   }
 
-  /* Section Spacing & Titles */
+  /* ─── Section spacing ─── */
   .stats-section,
   .courses-section,
   .results-section,
   .teachers-section,
   .certificates-section,
   .enrollment-form-section {
-    padding: 55px 0;
+    padding: 50px 0;
   }
 
   .section-title {
-    font-size: clamp(1.65rem, 6vw, 2.25rem);
-    margin-bottom: 2rem;
+    font-size: clamp(1.6rem, 6vw, 2.1rem);
+    margin-bottom: 1.75rem;
+    letter-spacing: -0.5px;
   }
 
   .section-subtitle {
-    font-size: 0.88rem;
-    margin-top: -1.4rem;
-    margin-bottom: 2rem;
+    font-size: 0.86rem;
+    margin-top: -1.2rem;
+    margin-bottom: 1.75rem;
   }
 
-  /* Section Grids */
-  .stats-grid,
-  .courses-grid,
-  .results-grid,
-  .teachers-grid,
-  .certificates-grid,
-  .form-grid {
+  /* ─── Grids → single column on mobile ─── */
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .courses-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  /* Remove min-height from course cards on mobile */
+  .course-card {
+    min-height: auto;
+    padding: 24px 20px;
+  }
+
+  .results-grid {
     grid-template-columns: 1fr;
     gap: 20px;
   }
 
-  .form-grid {
-    gap: 32px;
+  /* Reset result card transforms on mobile */
+  .result-card:nth-child(2),
+  .result-card:nth-child(3) {
+    transform: none !important;
+    grid-column: auto;
   }
 
-  .form-container {
+  .result-card {
     padding: 28px 20px;
-    border-radius: 24px;
+    gap: 20px;
+  }
+
+  .teachers-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .certificates-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .form-container,
+  .form-wrapper {
+    padding: 28px 20px;
+    border-radius: 20px;
   }
 
   .form-title {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
   }
 
-  /* Footer Mobile */
+  /* ─── Stats cards compact ─── */
+  .stat-card {
+    padding: 30px 20px;
+  }
+
+  .stat-icon {
+    width: 42px;
+    height: 42px;
+    margin-bottom: 12px;
+  }
+
+  /* ─── Footer mobile ─── */
   .main-footer {
-    padding: 55px 0 28px;
+    padding: 50px 0 28px;
   }
 
   .footer-grid {
     grid-template-columns: 1fr;
-    gap: 32px;
+    gap: 28px;
     text-align: center;
   }
 
@@ -3418,11 +3546,12 @@ a.contact-desc:hover {
 
   .footer-bottom {
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
     text-align: center;
   }
 }
 
+/* ── Small phones (≤ 480px) ──────────────────────────────────────────────── */
 @media (max-width: 480px) {
   .main-header {
     top: 6px;
@@ -3470,22 +3599,21 @@ a.contact-desc:hover {
   }
 
   .hero-section {
-    padding-top: 90px;
-    padding-bottom: 35px;
+    padding-top: 82px;
+    padding-bottom: 30px;
   }
 
   .hero-title {
-    font-size: clamp(1.6rem, 7vw, 2.2rem);
+    font-size: clamp(1.6rem, 7.5vw, 2.2rem);
   }
 
-  .hero-chips {
-    flex-direction: column;
-    align-items: stretch;
+  /* On very small phones: stack float cards vertically */
+  .hero-float-cards {
+    grid-template-columns: 1fr;
   }
 
-  .hero-chip {
-    width: 100%;
-    justify-content: center;
+  .hero-float-card:nth-child(3) {
+    grid-column: auto;
   }
 
   .content-container {
@@ -3493,18 +3621,26 @@ a.contact-desc:hover {
   }
 
   .glass-panel {
-    border-radius: 18px;
+    border-radius: 16px;
   }
 
   .stat-card,
-  .course-card,
   .result-card,
   .teacher-card {
-    padding: 22px 16px;
+    padding: 20px 16px;
+  }
+
+  .course-card {
+    padding: 20px 16px;
+  }
+
+  .certificates-grid {
+    grid-template-columns: 1fr;
   }
 
   .teacher-image-wrapper {
-    height: 200px;
+    width: 100px;
+    height: 100px;
   }
 
   .form-input,
@@ -3512,101 +3648,65 @@ a.contact-desc:hover {
     padding: 13px 16px;
     font-size: 0.9rem;
   }
+
+  .section-title {
+    font-size: clamp(1.4rem, 6.5vw, 1.9rem);
+  }
 }
 
 /* ==========================================================================
    14. Micro-animations & Extra Polish
    ========================================================================== */
 
-/* Shimmer effect for glass panels */
 @keyframes shimmer {
-  0% {
-    background-position: -200% center;
-  }
-
-  100% {
-    background-position: 200% center;
-  }
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
 }
 
-/* Pulse glow for accent elements */
 @keyframes pulseGlow {
-
-  0%,
-  100% {
-    box-shadow: 0 0 10px var(--glow-color);
-  }
-
-  50% {
-    box-shadow: 0 0 24px var(--glow-color), 0 0 40px rgba(236, 64, 122, 0.2);
-  }
+  0%, 100% { box-shadow: 0 0 10px var(--glow-color); }
+  50% { box-shadow: 0 0 24px var(--glow-color), 0 0 40px rgba(236, 64, 122, 0.2); }
 }
 
-/* Float animation for visual elements */
 @keyframes floatUp {
-
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-
-  50% {
-    transform: translateY(-10px);
-  }
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
 }
 
-/* Typing cursor blink */
 @keyframes cursorBlink {
-
-  0%,
-  50% {
-    opacity: 1;
-  }
-
-  51%,
-  100% {
-    opacity: 0;
-  }
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
 }
 
-/* Number odometer effect background */
 .stat-number {
   background-size: 200% auto;
   animation: none;
 }
 
-/* Hover lift for sections */
-.result-card:nth-child(2),
-.result-card:nth-child(3) {
-  transform: none;
-}
-
-@media (min-width: 768px) {
-  .result-card:nth-child(2) {
-    transform: translateY(22px);
-  }
-
-  .result-card:nth-child(3) {
-    transform: translateY(-12px);
-  }
-
-  .result-card:nth-child(2):hover {
-    transform: translateY(14px) !important;
-  }
-
-  .result-card:nth-child(3):hover {
-    transform: translateY(-20px) !important;
-  }
-}
-
-/* Section spacing helper */
-section+section {
+section + section {
   border-top: 1px solid transparent;
 }
 
-/* Accessibility / Reduced Motion preference */
-@media (prefers-reduced-motion: reduce) {
+/* ── Performance: GPU compositing layers for animated elements ─────────── */
+.glow-blob,
+.hero-float-card,
+.hero-score-card,
+.main-header,
+.mobile-nav {
+  will-change: transform;
+}
 
+/* ── CSS containment for heavy sections ───────────────────────────────── */
+.stats-section,
+.courses-section,
+.results-section,
+.teachers-section,
+.certificates-section {
+  contain: layout style;
+}
+
+/* ── Accessibility / Reduced Motion preference ─────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
   *,
   *::before,
   *::after {
@@ -3638,4 +3738,4 @@ section+section {
     transition: none !important;
     clip-path: none !important;
   }
-}
+}
