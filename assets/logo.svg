@@ -1,51 +1,45 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%">
   <!-- Double Concentric Outer Rings -->
-  <circle cx="250" cy="215" r="195" fill="none" stroke="currentColor" stroke-width="12" />
-  <circle cx="250" cy="215" r="180" fill="none" stroke="currentColor" stroke-width="4" />
+  <circle cx="250" cy="185" r="165" fill="none" stroke="currentColor" stroke-width="14" />
+  <circle cx="250" cy="185" r="148" fill="none" stroke="currentColor" stroke-width="4" />
 
-  <!-- Monogram S and Integrated Pencil Tip -->
+  <!-- Monogram S with Stylized Pencil -->
   <g fill="currentColor">
-    <!-- Smooth Block Monogram S -->
-    <path d="M 190 105 
-             L 310 105 
-             A 45 45 0 0 1 355 150 
-             A 45 45 0 0 1 310 195 
-             L 240 195 
-             A 15 15 0 0 0 225 210 
-             A 15 15 0 0 0 240 225 
-             L 310 225 
-             A 55 55 0 0 1 365 280 
-             A 55 55 0 0 1 310 335 
-             L 220 335 
-             L 220 295 
-             L 310 295 
-             A 15 15 0 0 0 325 280 
-             A 15 15 0 0 0 310 265 
-             L 240 265 
-             A 55 55 0 0 1 185 210 
-             A 55 55 0 0 1 240 155 
-             L 310 155 
-             A 5 5 0 0 0 315 150 
-             A 5 5 0 0 0 310 145 
-             L 190 145 
-             A 20 20 0 0 1 170 125 
-             A 20 20 0 0 1 190 105 
+    <!-- Main S Monogram Body -->
+    <path d="M 175 110 
+             L 325 78 
+             L 325 112 
+             L 235 112 
+             L 300 190 
+             A 45 45 0 0 1 335 245 
+             A 45 45 0 0 1 295 295 
+             C 260 325 200 325 170 300 
+             L 170 262 
+             C 200 282 250 285 275 268 
+             A 18 18 0 0 0 290 245 
+             A 18 18 0 0 0 275 225 
+             L 215 155 
+             L 175 155 
              Z" />
 
-    <!-- Pencil Shaft extending from bottom-left ring up-right -->
-    <path d="M 115 345 L 140 370 L 195 315 L 170 290 Z" />
-    <!-- Pencil Cone -->
-    <path d="M 170 290 L 195 315 L 220 280 Z" />
-    <!-- Pencil Lead Point piercing bottom curve of S -->
-    <path d="M 205 295 L 220 280 L 210 275 Z" />
+    <!-- Pencil Shaft & Lead Tip (Bottom Left of S) -->
+    <path d="M 160 270 L 205 215 L 225 240 L 180 295 Z" />
+    <path d="M 205 215 L 220 198 L 225 240 Z" />
   </g>
 
-  <!-- Subtext Motto -->
-  <text x="250" y="452" 
+  <!-- Text inside bottom of circle -->
+  <text x="250" y="325" 
         font-family="'Space Grotesk', 'Manrope', sans-serif" 
-        font-size="20" 
-        font-weight="700" 
-        letter-spacing="6.5" 
+        font-size="14" 
+        font-weight="800" 
+        letter-spacing="5" 
         fill="currentColor" 
-        text-anchor="middle">BETTER FUTURE STARTS HERE</text>
+        text-anchor="middle">BETTER FUTURE</text>
+  <text x="250" y="343" 
+        font-family="'Space Grotesk', 'Manrope', sans-serif" 
+        font-size="14" 
+        font-weight="800" 
+        letter-spacing="5" 
+        fill="currentColor" 
+        text-anchor="middle">STARTS HERE</text>
 </svg>
