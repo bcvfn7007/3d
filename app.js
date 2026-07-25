@@ -531,17 +531,14 @@ applyTheme(initialTheme);
 
 
 /* --------------------------------------------------------------------------
-   3. Smooth Inertial Scrolling (Lenis) — Desktop only for native mobile perf
+   3. Smooth Inertial Scrolling (Lenis)
    -------------------------------------------------------------------------- */
-const isMobileDevice = window.innerWidth < 768 || ('ontouchstart' in window && window.innerWidth < 1024);
-
-// Only initialize Lenis on desktop — mobile native scroll is smoother and faster
 const lenis = new Lenis({
-  duration: isMobileDevice ? 0.6 : 1.2,
+  duration: 1.2,
   easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-  smoothWheel: !isMobileDevice,
-  smoothTouch: false,  // Always false — native touch is better
-  touchMultiplier: 1,
+  smoothWheel: true,
+  smoothTouch: false,
+  touchMultiplier: 1.5,
 });
 
 if (typeof ScrollTrigger !== 'undefined') {
@@ -556,34 +553,45 @@ requestAnimationFrame(raf);
 
 
 /* --------------------------------------------------------------------------
-   4. Header Scroll Behaviour — adds .scrolled class
+   4. Header Scroll Behaviour & Page Scroll Progress
    -------------------------------------------------------------------------- */
 const mainHeader = document.getElementById('main-header');
+const scrollProgressBar = document.getElementById('scroll-progress-bar');
 let lastScrollY = 0;
 let headerVisible = true;
 
-lenis.on('scroll', ({ scroll }) => {
-  if (!mainHeader) return;
+function updateScrollUI(scrollPos) {
+  const currentY = scrollPos !== undefined ? scrollPos : (window.scrollY || window.pageYOffset || 0);
 
-  // Add scrolled class for styling
-  mainHeader.classList.toggle('scrolled', scroll > 60);
+  // 1. Header scroll state & auto-hide
+  if (mainHeader) {
+    mainHeader.classList.toggle('scrolled', currentY > 60);
 
-  // Auto-hide on scroll down, show on scroll up (after 200px)
-  if (scroll > 200) {
-    if (scroll > lastScrollY + 5 && headerVisible) {
-      mainHeader.style.transform = 'translateY(-120%)';
-      headerVisible = false;
-    } else if (scroll < lastScrollY - 5 && !headerVisible) {
+    if (currentY > 200) {
+      if (currentY > lastScrollY + 5 && headerVisible) {
+        mainHeader.style.transform = 'translateY(-120%)';
+        headerVisible = false;
+      } else if (currentY < lastScrollY - 5 && !headerVisible) {
+        mainHeader.style.transform = 'translateY(0)';
+        headerVisible = true;
+      }
+    } else {
       mainHeader.style.transform = 'translateY(0)';
       headerVisible = true;
     }
-  } else {
-    mainHeader.style.transform = 'translateY(0)';
-    headerVisible = true;
+    lastScrollY = currentY;
   }
 
-  lastScrollY = scroll;
-});
+  // 2. Page Scroll Progress bar
+  if (scrollProgressBar) {
+    const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = totalHeight > 0 ? (currentY / totalHeight) * 100 : 0;
+    scrollProgressBar.style.width = `${Math.min(100, Math.max(0, pct))}%`;
+  }
+}
+
+lenis.on('scroll', ({ scroll }) => updateScrollUI(scroll));
+window.addEventListener('scroll', () => updateScrollUI(), { passive: true });
 
 // Add smooth header transition
 if (mainHeader) {
