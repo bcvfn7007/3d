@@ -768,10 +768,9 @@ if (typeof gsap !== 'undefined') {
   // ── Hero Before/After Mask Loop ───────────────────────────────────────────
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  if (!prefersReducedMotion) {
+  if (!prefersReducedMotion && document.querySelector('.hero-mask-after')) {
     const heroMaskTl = gsap.timeline({ repeat: -1, yoyo: true });
 
-    // Start fully hidden (clip-path from 0% width), expand to 100%, yoyo back
     heroMaskTl
       .to('.hero-mask-after', {
         clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
@@ -784,8 +783,9 @@ if (typeof gsap !== 'undefined') {
         duration: 1.5,  // Hold at full
         ease: 'none'
       });
+  }
 
-    // Show/hide the slider indicator line based on mask position
+  if (!prefersReducedMotion && document.querySelector('.hero-mask-slider-line')) {
     gsap.to('.hero-mask-slider-line', {
       opacity: 1,
       duration: 0.5,
@@ -794,10 +794,6 @@ if (typeof gsap !== 'undefined') {
       ease: 'none',
       delay: 1
     });
-  } else {
-    // Reduced motion: just show "after" state
-    gsap.set('.hero-mask-after', { clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)' });
-    gsap.set('.hero-mask-before', { display: 'none' });
   }
 
   // ── SVG Flourish Draw-on Scroll ───────────────────────────────────────────
@@ -1154,28 +1150,41 @@ const mobileToggle = document.getElementById('mobile-menu-toggle');
 const mobileNav = document.getElementById('mobile-nav');
 
 if (mobileToggle && mobileNav) {
-  mobileToggle.addEventListener('click', () => {
-    const isExpanded = mobileToggle.getAttribute('aria-expanded') === 'true';
-    const open = !isExpanded;
+  function closeMobileNav() {
+    mobileToggle.setAttribute('aria-expanded', 'false');
+    mobileNav.classList.remove('open');
+    mobileNav.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    if (typeof lenis !== 'undefined') lenis.start();
+  }
 
-    mobileToggle.setAttribute('aria-expanded', String(open));
-    mobileNav.classList.toggle('open', open);
-    mobileNav.setAttribute('aria-hidden', String(!open));
+  function openMobileNav() {
+    mobileToggle.setAttribute('aria-expanded', 'true');
+    mobileNav.classList.add('open');
+    mobileNav.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    if (typeof lenis !== 'undefined') lenis.stop();
 
-    // Animate mobile nav links with stagger
-    if (open && typeof gsap !== 'undefined') {
+    if (typeof gsap !== 'undefined') {
       gsap.from('.mobile-nav-link', {
         opacity: 0, x: -20, duration: 0.4,
         stagger: 0.06, ease: 'power2.out', delay: 0.1
       });
     }
+  }
+
+  mobileToggle.addEventListener('click', () => {
+    const isExpanded = mobileToggle.getAttribute('aria-expanded') === 'true';
+    if (isExpanded) {
+      closeMobileNav();
+    } else {
+      openMobileNav();
+    }
   });
 
   document.querySelectorAll('.mobile-nav-link, .cta-button-mobile').forEach(link => {
     link.addEventListener('click', () => {
-      mobileToggle.setAttribute('aria-expanded', 'false');
-      mobileNav.classList.remove('open');
-      mobileNav.setAttribute('aria-hidden', 'true');
+      closeMobileNav();
     });
   });
 
@@ -1183,9 +1192,7 @@ if (mobileToggle && mobileNav) {
   document.addEventListener('click', e => {
     if (!mobileNav.contains(e.target) && !mobileToggle.contains(e.target)) {
       if (mobileNav.classList.contains('open')) {
-        mobileToggle.setAttribute('aria-expanded', 'false');
-        mobileNav.classList.remove('open');
-        mobileNav.setAttribute('aria-hidden', 'true');
+        closeMobileNav();
       }
     }
   });
