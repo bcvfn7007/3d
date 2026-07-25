@@ -3174,10 +3174,32 @@ a.contact-desc:hover {
   }
 }
 
+@media (max-width: 1023px) {
+  .custom-cursor,
+  .ambient-spotlight {
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+  }
+}
+
 @media (max-width: 767px) {
   /* Mobile Performance: Hide WebGL 3D canvas for buttery smooth 60 FPS */
   .spline-wrapper {
     display: none !important;
+  }
+
+  .flourish-transition-container {
+    height: 110px !important;
+    overflow: hidden !important;
+  }
+
+  .flourish-bg-text {
+    font-size: clamp(1.8rem, 8vw, 3.2rem) !important;
+    letter-spacing: 3px !important;
+    max-width: 100% !important;
+    overflow: hidden !important;
+    white-space: nowrap !important;
   }
 
   .glass-panel {
